@@ -1,0 +1,541 @@
+.services {
+  width: 100%;
+  background: #5E17EB;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* ─── Horizontal Scroll Track ─── */
+.track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 32px;
+  will-change: transform;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* ─── Heading Block — takes full viewport width so cards start off-screen ─── */
+.headingBlock {
+  flex: 0 0 100vw;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  margin-bottom: 24px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 18px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.heading {
+  font-family: 'Quizlo', 'Korvich', 'Gibed', var(--font-heading), sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 800;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.headingAccent {
+  color: #c2b0ff;
+}
+
+/* ─── Service Card — alternating tilt ─── */
+.card {
+  flex: 0 0 400px;
+  height: 540px;
+  border-radius: 28px;
+  background: linear-gradient(185deg, #6a1fe0 0%, #4a0fbf 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 45px;
+  cursor: pointer;
+  box-shadow: 
+    0 15px 35px rgba(15, 3, 50, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  /* 3D perspective setup */
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) rotate(var(--tilt, 0deg));
+  
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+    box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    background 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Spotlight hover glow shader overlay */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 250px at var(--mouse-x, -250px) var(--mouse-y, -250px), rgba(255, 255, 255, 0.12), transparent 85%);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover {
+  transform: 
+    perspective(1000px) 
+    translateY(-16px) 
+    rotateX(var(--rotate-x, 0deg)) 
+    rotateY(var(--rotate-y, 0deg)) 
+    rotate(calc(var(--tilt, 0deg) * 0.45)) 
+    scale(1.03);
+  background: linear-gradient(185deg, #7b2ff2 0%, #5515d0 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 25px 50px rgba(15, 3, 50, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Decorative background arcs ─── */
+.cardArcs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 0;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.1));
+  
+  /* Parallax depth layer 1 */
+  transform: translateZ(20px);
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.4s ease,
+    filter 0.4s ease;
+}
+
+.card:hover .cardArcs {
+  transform: translateZ(25px) scale(1.04);
+  opacity: 0.28;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15));
+}
+
+/* ─── Card Icon ─── */
+.cardIcon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  
+  /* Parallax depth layer 2.5 */
+  transform: translateZ(45px);
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    color 0.4s ease,
+    filter 0.4s ease;
+}
+
+.cardIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.card:hover .cardIcon {
+  transform: translateZ(75px) translateY(-6px);
+  color: #ffffff;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+/* ─── Card Title ─── */
+.cardTitle {
+  font-family: 'Quizlo', 'Korvich', 'Gibed', var(--font-heading), sans-serif;
+  font-size: clamp(2.1rem, 4.0vw, 2.8rem);
+  font-weight: 800;
+  font-style: normal;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  text-align: center;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+  
+  /* Parallax depth layer 3 */
+  transform: translateZ(55px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card:hover .cardTitle {
+  transform: translateZ(85px) translateY(-6px);
+}
+
+/* ─── Card Description ─── */
+.cardDesc {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 24px;
+  max-width: 310px;
+  position: relative;
+  z-index: 2;
+  
+  /* Parallax depth layer 4 */
+  transform: translateZ(65px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card:hover .cardDesc {
+  transform: translateZ(95px) translateY(-3px);
+}
+
+/* ─── Card Logo ─── */
+.cardLogo {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(30px);
+  opacity: 0.15;
+  width: 50px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.4s ease, bottom 0.4s ease;
+}
+
+.card:hover .cardLogo {
+  opacity: 0.25;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .services {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 80px 0 60px;
+  }
+  .track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    transform: none !important;
+    width: 100%;
+  }
+  .headingBlock {
+    flex: none;
+    width: 100%;
+    padding: 0 24px;
+    margin-bottom: 32px;
+  }
+  .heading {
+    white-space: normal;
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+  .card {
+    flex: none;
+    width: calc(100% - 48px);
+    max-width: 400px;
+    height: auto;
+    min-height: 320px;
+    padding: 48px 28px;
+    transform: none !important;
+    border-radius: 22px;
+  }
+  .card:hover {
+    transform: none !important;
+  }
+  .cardArcs {
+    transform: none;
+  }
+  .card:hover .cardArcs {
+    transform: none;
+  }
+  .cardIcon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    transform: none;
+  }
+  .card:hover .cardIcon {
+    transform: none;
+    filter: none;
+  }
+  .cardTitle {
+    font-size: clamp(1.6rem, 6vw, 2rem);
+    transform: none;
+  }
+  .card:hover .cardTitle {
+    transform: none;
+  }
+  .cardDesc {
+    font-size: 0.95rem;
+    margin-top: 16px;
+    max-width: 100%;
+    transform: none;
+  }
+  .card:hover .cardDesc {
+    transform: none;
+  }
+  .cardLogo {
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services {
+    padding: 60px 0 40px;
+  }
+  .headingBlock {
+    padding: 0 16px;
+    margin-bottom: 24px;
+  }
+  .heading {
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+  .card {
+    width: calc(100% - 32px);
+    min-height: 280px;
+    padding: 40px 22px;
+    border-radius: 18px;
+  }
+  .cardIcon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+  }
+  .cardTitle {
+    font-size: clamp(1.4rem, 5.5vw, 1.7rem);
+  }
+  .cardDesc {
+    font-size: 0.88rem;
+    margin-top: 12px;
+  }
+  .cardLogo {
+    bottom: 24px;
+  }
+  .label {
+    font-size: 0.65rem;
+  }
+}
+
+.transitionSpacer {
+  width: 100%;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.05));
+  pointer-events: none;
+}
+
+/* ─── Scroll Hint ─── */
+.scrollHint {
+  position: absolute;
+  right: 120px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scrollRing {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollRingSvg {
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  animation: rotateRing 6s linear infinite;
+}
+
+.scrollRingArc {
+  transform-origin: center;
+}
+
+.scrollArrow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceArrow 1.5s ease-in-out infinite;
+}
+
+.scrollText {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@keyframes rotateRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounceArrow {
+  0%, 100% {
+    transform: translate(-55%, -50%);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-25%, -50%);
+    opacity: 1;
+  }
+}
+
+.decorCarTrack {
+  position: absolute;
+  left: calc(100vw - 680px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.carWrapper {
+  position: relative;
+  animation: carIdle 2.5s ease-in-out infinite;
+}
+
+.rumbleWrapper {
+  position: relative;
+  animation: engineRumble 0.12s linear infinite;
+}
+
+.carImage {
+  width: 400px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.22));
+}
+
+.wheel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.wheelImage {
+  width: 400px;
+  height: auto;
+  display: block;
+}
+
+.leftWheel {
+  clip-path: circle(27.5px at 116.5px 273.1px);
+  transform-origin: 116.5px 273.1px;
+}
+
+.rightWheel {
+  clip-path: circle(27.5px at 299.2px 272.6px);
+  transform-origin: 299.2px 272.6px;
+}
+
+@keyframes engineRumble {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.8px);
+  }
+}
+
+@keyframes carIdle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+}
+
+.towRope {
+  position: absolute;
+  left: calc(100vw - 385px);
+  top: calc(50% - 200px);
+  width: 427px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 1;
+  animation: ropeWobble 2.5s ease-in-out infinite;
+  transform-origin: 5px 230px;
+}
+
+@keyframes ropeWobble {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0.8deg) translateY(1.5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .scrollHint,
+  .decorCarTrack,
+  .towRope {
+    display: none;
+  }
+}

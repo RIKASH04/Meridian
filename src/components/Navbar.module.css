@@ -1,0 +1,260 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px 0;
+  transition: background 0.4s ease, padding 0.4s ease;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(94, 23, 235, 0.15);
+}
+
+.navInner {
+  width: 100%;
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  height: 40px;
+  overflow: visible;
+}
+
+
+
+/* Desktop Links — hidden, navigation via hamburger menu */
+.desktopLinks {
+  display: none;
+}
+
+.navLink {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* Right section */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 100px;
+  background: #fff;
+  color: #5E17EB;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  cursor: none;
+}
+
+.ctaBtn:hover {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Hamburger */
+.menuBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.menuBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.menuLine {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.menuBtnOpen .menuLine:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.menuBtnOpen .menuLine:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Menu Overlay */
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #232323;
+  z-index: 999;
+  clip-path: circle(0% at 95% 5%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuContent {
+  width: 100%;
+  max-width: 900px;
+  padding: 120px 60px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.menuLinksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+
+.menuLink {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.menuLink:hover {
+  padding-left: 20px;
+  border-bottom-color: rgba(142, 160, 255, 0.3);
+}
+
+.menuLinkNumber {
+  font-size: 0.75rem;
+  color: rgba(142, 160, 255, 0.6);
+  font-weight: 300;
+}
+
+.menuLinkText {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.menuLink:hover .menuLinkText {
+  color: #8EA0FF;
+}
+
+/* Menu Footer */
+.menuFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.menuSocial {
+  display: flex;
+  gap: 24px;
+}
+
+.menuSocial a {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s ease;
+  letter-spacing: 0.03em;
+}
+
+.menuSocial a:hover {
+  color: #8EA0FF;
+}
+
+.menuEmail {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navInner {
+    padding: 0 24px;
+  }
+
+  .desktopLinks {
+    display: none;
+  }
+
+  .ctaBtn {
+    display: none;
+  }
+
+  .menuContent {
+    padding: 100px 24px 40px;
+  }
+
+  .menuLinkText {
+    font-size: 2rem;
+  }
+
+  .menuFooter {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+}

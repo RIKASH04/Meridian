@@ -1,0 +1,310 @@
+.footer {
+  width: 100%;
+  background: #000000;
+  padding: 120px 0 60px;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+}
+
+/* ─── Main Grid ─── */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
+  margin-bottom: 80px;
+}
+
+.sectionLabel {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+
+/* ─── Pages Section ─── */
+.pagesCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagesLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linkWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.hugeLink {
+  font-family: 'Quizlo', 'Korvich', 'Gibed', var(--font-heading), sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  transition: color 0.4s ease, transform 0.4s ease;
+  display: inline-block;
+}
+
+.hugeLink:hover {
+  color: #5E17EB;
+  transform: translateX(10px);
+}
+
+.decorDot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #5E17EB;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 15px #5E17EB;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    box-shadow: 0 0 20px #5E17EB;
+  }
+}
+
+/* ─── Social & Quick Contact ─── */
+.socialCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 44px;
+}
+
+.boldSocialLink {
+  font-family: 'Quizlo', 'Korvich', 'Gibed', var(--font-heading), sans-serif;
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  transition: color 0.4s ease, transform 0.4s ease;
+  display: inline-block;
+}
+
+.boldSocialLink:hover {
+  color: #5E17EB;
+  transform: translateX(6px);
+}
+
+.contactDirect {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contactInfo {
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.4s ease;
+}
+
+.contactInfo:hover {
+  color: #5E17EB;
+}
+
+/* ─── Office Row ─── */
+.officeRow {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 60px;
+  margin-bottom: 60px;
+}
+
+.officeLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.avatarCard {
+  width: 100px;
+  height: 135px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatarImg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.addressBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subLabel {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.addressText {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.officeRight {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* ─── Bottom Bar ─── */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 32px;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 32px;
+}
+
+.legalLink {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+.legalLink:hover {
+  color: #ffffff;
+}
+
+/* ─── Floating/Sticky WhatsApp Widget ─── */
+.whatsappBtn {
+  position: absolute;
+  right: 60px;
+  bottom: 120px;
+  background: #5E17EB;
+  padding: 14px 28px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 25px rgba(94, 23, 235, 0.3);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsappBtn:hover {
+  background: #4a12b8;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(94, 23, 235, 0.5);
+}
+
+.whatsappIcon {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+.whatsappText {
+  letter-spacing: 0.02em;
+}
+
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .officeRow {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .whatsappBtn {
+    position: static;
+    display: inline-flex;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 80px 0 40px;
+  }
+  .container {
+    padding: 0 24px;
+  }
+  .officeRow {
+    padding-top: 40px;
+  }
+  .officeLeft {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .bottomBar {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .legalLinks {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
