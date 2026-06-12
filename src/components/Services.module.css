@@ -62,36 +62,35 @@
   color: #c2b0ff;
 }
 
-/* ─── Service Card — alternating tilt ─── */
+/* ─── Service Card — phone mockup style ─── */
 .card {
-  flex: 0 0 400px;
-  height: 540px;
+  flex: 0 0 420px;
+  height: 580px;
   border-radius: 28px;
-  background: linear-gradient(185deg, #6a1fe0 0%, #4a0fbf 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 2;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 60px 45px;
+  justify-content: flex-start;
+  padding: 0;
   cursor: pointer;
-  box-shadow: 
-    0 15px 35px rgba(15, 3, 50, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+
   /* 3D perspective setup */
   transform-style: preserve-3d;
   perspective: 1000px;
   will-change: transform;
   transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) rotate(var(--tilt, 0deg));
-  
-  transition: 
-    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+
+  transition:
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
     box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-    background 0.4s ease,
     border-color 0.4s ease;
 }
 
@@ -100,25 +99,71 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle 250px at var(--mouse-x, -250px) var(--mouse-y, -250px), rgba(255, 255, 255, 0.12), transparent 85%);
+  background: radial-gradient(circle 250px at var(--mouse-x, -250px) var(--mouse-y, -250px), rgba(94, 23, 235, 0.06), transparent 85%);
   pointer-events: none;
-  z-index: 1;
+  z-index: 5;
   transition: opacity 0.4s ease;
 }
 
 .card:hover {
-  transform: 
-    perspective(1000px) 
-    translateY(-16px) 
-    rotateX(var(--rotate-x, 0deg)) 
-    rotateY(var(--rotate-y, 0deg)) 
-    rotate(calc(var(--tilt, 0deg) * 0.45)) 
-    scale(1.03);
-  background: linear-gradient(185deg, #7b2ff2 0%, #5515d0 100%);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 
-    0 25px 50px rgba(15, 3, 50, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform:
+    perspective(1000px) translateY(-16px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) rotate(calc(var(--tilt, 0deg) * 0.45)) scale(1.03);
+  border-color: rgba(94, 23, 235, 0.15);
+  box-shadow:
+    0 25px 50px rgba(94, 23, 235, 0.15),
+    0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Card Content Area ─── */
+.phoneArea {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0d071b; /* Deep dark purple tech background */
+}
+
+.cardBgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.2; /* Lower background opacity to let dark background stand out */
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.4s ease;
+}
+
+.card:hover .cardBgImage {
+  transform: scale(1.06);
+  opacity: 0.3; /* Subtle blend highlight on hover */
+}
+
+.screenContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 85%;
+  height: auto;
+  background: transparent;
+  transform: translate(-50%, -50%) translateZ(30px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card:hover .screenContent {
+  transform: translate(-50%, -50%) translateZ(50px) translateY(-8px);
 }
 
 /* ─── Decorative background arcs ─── */
@@ -128,15 +173,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.2); /* Light colored arcs for dark background */
   pointer-events: none;
-  opacity: 0.15;
-  z-index: 0;
+  opacity: 0.05;
+  z-index: 1;
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.1));
-  
-  /* Parallax depth layer 1 */
   transform: translateZ(20px);
-  transition: 
+  transition:
     transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
     opacity 0.4s ease,
     filter 0.4s ease;
@@ -144,7 +187,7 @@
 
 .card:hover .cardArcs {
   transform: translateZ(25px) scale(1.04);
-  opacity: 0.28;
+  opacity: 0.1;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15));
 }
 
@@ -152,20 +195,17 @@
 .cardIcon {
   width: 52px;
   height: 52px;
-  margin-bottom: 24px;
-  color: rgba(255, 255, 255, 0.75);
+  color: #ffffff; /* White icon */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
-  
-  /* Parallax depth layer 2.5 */
-  transform: translateZ(45px);
-  transition: 
-    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+  transition:
     color 0.4s ease,
-    filter 0.4s ease;
+    filter 0.4s ease,
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.1));
 }
 
 .cardIcon svg {
@@ -175,71 +215,98 @@
 }
 
 .card:hover .cardIcon {
-  transform: translateZ(75px) translateY(-6px);
   color: #ffffff;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+  transform: scale(1.08);
 }
 
 /* ─── Card Title ─── */
 .cardTitle {
   font-family: 'Quizlo', 'Korvich', 'Gibed', var(--font-heading), sans-serif;
-  font-size: clamp(2.1rem, 4.0vw, 2.8rem);
+  font-size: 3.2rem; /* Big title */
   font-weight: 800;
   font-style: normal;
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  color: #ffffff; /* White title text */
+  text-shadow: none; /* No glow effect */
   text-align: center;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   position: relative;
   z-index: 2;
-  
-  /* Parallax depth layer 3 */
-  transform: translateZ(55px);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  white-space: pre-wrap; /* Preserve formatting and wrap properly */
+  width: 100%;
+  display: block;
 }
 
-.card:hover .cardTitle {
-  transform: translateZ(85px) translateY(-6px);
-}
-
-/* ─── Card Description ─── */
-.cardDesc {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: center;
-  line-height: 1.6;
-  margin-top: 24px;
-  max-width: 310px;
-  position: relative;
-  z-index: 2;
-  
-  /* Parallax depth layer 4 */
-  transform: translateZ(65px);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.card:hover .cardDesc {
-  transform: translateZ(95px) translateY(-3px);
-}
-
-/* ─── Card Logo ─── */
-.cardLogo {
+/* ─── Japanese Watermark Text ─── */
+.japaneseText {
   position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%) translateZ(30px);
-  opacity: 0.15;
-  width: 50px;
+  top: 24px;
+  right: 24px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "MS Gothic", "Noto Sans JP", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: #ffffff; /* White watermark */
+  opacity: 0.7;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateZ(20px);
+}
+
+.card:hover .japaneseText {
+  opacity: 0.95;
+  transform: translateZ(35px);
+}
+
+/* ─── Bottom info area (outside phone) ─── */
+.cardInfo {
+  width: 100%;
+  padding: 24px 30px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 3;
+  transform: translateZ(30px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card:hover .cardInfo {
+  transform: translateZ(50px);
+}
+
+/* ─── Card Logo (centered in bottom area) ─── */
+.cardLogo {
+  width: 40px;
   height: auto;
+  opacity: 0.7;
   pointer-events: none;
   z-index: 2;
-  transition: opacity 0.4s ease, bottom 0.4s ease;
+  transition: opacity 0.4s ease;
 }
 
 .card:hover .cardLogo {
-  opacity: 0.25;
+  opacity: 1;
+}
+
+/* ─── Card Description (below logo) ─── */
+.cardDesc {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 300px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ─── Responsive ─── */
@@ -250,6 +317,7 @@
     position: relative;
     padding: 0;
   }
+
   .track {
     position: relative;
     height: 100%;
@@ -257,6 +325,7 @@
     overflow: hidden;
     transform: none !important;
   }
+
   .headingBlock {
     position: absolute;
     top: 76px;
@@ -266,13 +335,16 @@
     z-index: 5;
     margin-bottom: 0;
   }
+
   .heading {
     white-space: nowrap;
     font-size: clamp(1.5rem, 7.5vw, 2.4rem);
   }
+
   .heading br {
     display: none;
   }
+
   .card {
     position: absolute;
     top: 190px;
@@ -282,55 +354,48 @@
     width: auto;
     height: auto;
     min-height: unset;
-    padding: 48px 28px;
+    padding: 0;
     margin: 0;
     --tilt: 0deg !important;
     border-radius: 22px;
     box-shadow:
-      0 -8px 30px rgba(15, 3, 50, 0.4),
-      0 15px 35px rgba(15, 3, 50, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      0 -8px 30px rgba(0, 0, 0, 0.08),
+      0 15px 35px rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.04);
   }
+
   .card:last-child {
     margin-bottom: 0;
   }
+
   .card:hover {
     transform: none !important;
   }
+
   .cardArcs {
     transform: none;
   }
+
   .card:hover .cardArcs {
     transform: none;
   }
-  .cardIcon {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 24px;
+
+  .cardInfo {
+    transform: none;
+    padding: 20px 24px 24px;
+  }
+
+  .card:hover .cardInfo {
     transform: none;
   }
-  .card:hover .cardIcon {
-    transform: none;
-    filter: none;
-  }
-  .cardTitle {
-    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
-    transform: none;
-  }
-  .card:hover .cardTitle {
-    transform: none;
-  }
+
   .cardDesc {
-    font-size: 1.1rem;
-    margin-top: 18px;
+    font-size: 0.85rem;
     max-width: 100%;
-    transform: none;
   }
-  .card:hover .cardDesc {
-    transform: none;
-  }
+
   .cardLogo {
-    bottom: 30px;
+    width: 35px;
   }
 }
 
@@ -339,33 +404,32 @@
     padding: 0 16px;
     top: 68px;
   }
+
   .heading {
     font-size: clamp(1.4rem, 7vw, 2rem);
   }
+
   .card {
     left: 16px;
     right: 16px;
     top: 175px;
     bottom: 3vh;
     min-height: unset;
-    padding: 40px 22px;
     border-radius: 18px;
   }
-  .cardIcon {
-    width: 58px;
-    height: 58px;
-    margin-bottom: 20px;
-  }
-  .cardTitle {
-    font-size: clamp(2.0rem, 8.2vw, 2.7rem);
-  }
+
   .cardDesc {
-    font-size: 1.05rem;
-    margin-top: 14px;
+    font-size: 0.8rem;
   }
+
   .cardLogo {
-    bottom: 24px;
+    width: 30px;
   }
+
+  .cardInfo {
+    padding: 16px 20px 20px;
+  }
+
   .label {
     font-size: 0.65rem;
   }
@@ -441,16 +505,20 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
 @keyframes bounceArrow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(-55%, -50%);
     opacity: 0.7;
   }
+
   50% {
     transform: translate(-25%, -50%);
     opacity: 1;
@@ -509,18 +577,24 @@
 }
 
 @keyframes engineRumble {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(0.8px);
   }
 }
 
 @keyframes carIdle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
+
   50% {
     transform: translateY(-4px) rotate(-0.5deg);
   }
@@ -539,15 +613,19 @@
 }
 
 @keyframes ropeWobble {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(0deg) translateY(0);
   }
+
   50% {
     transform: rotate(0.8deg) translateY(1.5px);
   }
 }
 
 @media (max-width: 768px) {
+
   .scrollHint,
   .decorCarTrack,
   .towRope {

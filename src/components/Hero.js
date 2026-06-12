@@ -76,11 +76,11 @@ export default function Hero({ visible }) {
       {/* Bottom Right Info */}
       <div className={styles.infoRight}>
         <div className={styles.labelRow} style={{ alignSelf: 'flex-end' }}>
-          <span className={styles.labelText}>SPECIALIZATION</span>
+          <span className={styles.labelText}>専門分野</span>
           <span className={styles.labelLine}></span>
         </div>
         <p className={styles.infoDescription} style={{ textAlign: 'right' }}>
-          Delivering end-to-end custom software systems, scalable cloud architectures, and intelligent automated workflows.
+          エンドツーエンドのカスタムソフトウェア開発、拡張性の高いクラウド設計、そしてAI駆動のインテリジェントな自動ワークフローを実現します。
         </p>
       </div>
 

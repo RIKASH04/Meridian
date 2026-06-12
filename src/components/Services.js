@@ -14,6 +14,7 @@ const services = [
   {
     title: 'Web & Mobile\nApplications',
     description: 'Fast, secure & responsive web and mobile apps that users love.',
+    japanese: '開発',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="2" y="3" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -26,6 +27,7 @@ const services = [
   {
     title: 'AI Solutions\n& Integrations',
     description: 'Intelligent systems powered by AI, ML & advanced analytics.',
+    japanese: '知能',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M9.5 2A4.5 4.5 0 0 0 5 6.5c0 .88.25 1.71.69 2.42A3.5 3.5 0 0 0 4 12c0 1.25.66 2.35 1.65 2.97A4.5 4.5 0 0 0 9.5 19.5v-2a2.5 2.5 0 0 1-2.5-2.5v-.5a1 1 0 0 0-1-1h-.5a1.5 1.5 0 0 1-1.5-1.5c0-.83.67-1.5 1.5-1.5h.5a1 1 0 0 0 1-1v-.5A2.5 2.5 0 0 1 9.5 8V2z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -40,6 +42,7 @@ const services = [
   {
     title: 'Automation\n& Workflows',
     description: 'Smart automations that eliminate manual work and boost productivity.',
+    japanese: '自動',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" stroke="currentColor" strokeWidth="1.8"/>
@@ -51,6 +54,7 @@ const services = [
   {
     title: 'ERP & Business\nSystems',
     description: 'Custom ERP solutions tailored to streamline your entire business.',
+    japanese: '業務',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="3" y="3" width="7" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
@@ -64,6 +68,7 @@ const services = [
   {
     title: 'Cloud &\nDevOps',
     description: 'Scalable cloud infrastructure and modern DevOps practices.',
+    japanese: '基盤',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.5 18H18a4 4 0 0 0 2-7.46 6 6 0 0 0-11.91-1C5.45 9.77 4 11.71 4 14a4 4 0 0 0 2.5 4z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -74,6 +79,7 @@ const services = [
   {
     title: 'E-Commerce\nSolutions',
     description: 'High-converting, secure and feature-rich online stores.',
+    japanese: '商業',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -85,6 +91,7 @@ const services = [
   {
     title: 'Cybersecurity',
     description: 'Enterprise-grade security to protect your data and users.',
+    japanese: '防衛',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -96,6 +103,7 @@ const services = [
   {
     title: 'Custom Software\nSystems',
     description: 'Bespoke solutions for complex challenges. Built to scale.',
+    japanese: '設計',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -388,47 +396,64 @@ export default function Services() {
             onMouseLeave={handleMouseLeave}
             style={{ '--tilt': i % 2 === 0 ? '-5deg' : '5deg' }}
           >
-            <svg className={styles.cardArcs} viewBox="0 0 400 550" preserveAspectRatio="none">
-              {/* Arcs */}
-              <circle cx="200" cy="600" r="380" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.15" />
-              <circle cx="200" cy="600" r="300" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.12" />
-              <circle cx="200" cy="600" r="220" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.08" />
-
-              {/* Decorative Curves/Lines */}
-              <path d="M-50,150 C100,50 300,250 450,100" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.12" />
-              <path d="M-50,220 C120,80 280,380 450,240" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.08" />
-              <path d="M-50,350 C150,250 250,500 450,380" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.10" />
-              <path d="M-50,80 C120,-20 280,180 450,50" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.06" />
-            </svg>
-
-            {service.icon && (
-              <div className={styles.cardIcon}>
-                {service.icon}
+            {/* Japanese vertical watermark in top-right */}
+            {service.japanese && (
+              <div className={styles.japaneseText}>
+                {service.japanese}
               </div>
             )}
 
-            <h3 className={styles.cardTitle}>
-              {service.title.split('\n').map((line, idx) => (
-                <span key={idx}>
-                  {line}
-                  {idx < service.title.split('\n').length - 1 && <br />}
-                </span>
-              ))}
-            </h3>
+            {/* Decorative arcs */}
+            <svg className={styles.cardArcs} viewBox="0 0 400 550" preserveAspectRatio="none">
+              <circle cx="200" cy="600" r="380" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.15" />
+              <circle cx="200" cy="600" r="300" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.12" />
+              <circle cx="200" cy="600" r="220" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.08" />
+              <path d="M-50,150 C100,50 300,250 450,100" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.12" />
+              <path d="M-50,220 C120,80 280,380 450,240" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.08" />
+            </svg>
 
-            {service.description && (
-              <p className={styles.cardDesc}>
-                {service.description}
-              </p>
-            )}
+            {/* Background image and content overlay */}
+            <div className={styles.phoneArea}>
+              <Image
+                src="/imgggg.jpg"
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 420px"
+                className={styles.cardBgImage}
+                priority={i < 3}
+              />
+              <div className={styles.screenContent}>
+                {service.icon && (
+                  <div className={styles.cardIcon}>
+                    {service.icon}
+                  </div>
+                )}
+                <h3 className={styles.cardTitle}>
+                  {service.title.split('\n').map((line, idx) => (
+                    <span key={idx}>
+                      {line}
+                      {idx < service.title.split('\n').length - 1 && <br />}
+                    </span>
+                  ))}
+                </h3>
+              </div>
+            </div>
 
-            <Image
-              src="/log2-white.svg"
-              alt=""
-              width={60}
-              height={40}
-              className={styles.cardLogo}
-            />
+            {/* Bottom info area — logo + description */}
+            <div className={styles.cardInfo}>
+              <Image
+                src="/log2.svg"
+                alt=""
+                width={40}
+                height={28}
+                className={styles.cardLogo}
+              />
+              {service.description && (
+                <p className={styles.cardDesc}>
+                  {service.description}
+                </p>
+              )}
+            </div>
           </div>
         ))}
       </div>

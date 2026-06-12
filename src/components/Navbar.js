@@ -24,11 +24,33 @@ export default function Navbar({ visible }) {
         duration: 0.8,
         ease: 'expo.out',
       });
+      // Staggered reveal for links
+      gsap.killTweensOf(linksRef.current);
+      gsap.fromTo(
+        linksRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.6,
+          ease: 'power2.out',
+          delay: 0.25,
+        }
+      );
     } else {
       gsap.to(menuRef.current, {
         clipPath: 'circle(0% at 95% 5%)',
         duration: 0.6,
         ease: 'expo.in',
+      });
+      // Reset links
+      gsap.killTweensOf(linksRef.current);
+      gsap.to(linksRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.4,
+        ease: 'power2.in',
       });
     }
   }, [menuOpen]);
@@ -84,6 +106,15 @@ export default function Navbar({ visible }) {
 
       {/* Full-screen Menu Overlay */}
       <div ref={menuRef} className={styles.menuOverlay}>
+        {/* Close button inside overlay */}
+        <button
+          className={styles.overlayCloseBtn}
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <span />
+          <span />
+        </button>
         <div className={styles.menuContent}>
           <div className={styles.menuLinksSection}>
             {navLinks.map((link, i) => (
