@@ -252,6 +252,7 @@
 @media (max-width: 768px) {
   .works {
     padding: 80px 0 0;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 200px, #1a1a2e 350px, #121212 100%);
   }
 
   .container {
@@ -276,33 +277,67 @@
   }
 
   .carouselSection {
-    background: #121212;
-    padding: 60px 0;
+    background: transparent;
+    padding: 40px 0;
+    position: relative;
+  }
+
+  /* Gradient fade on left and right edges */
+  .carouselSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(to right, #121212, transparent);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .carouselSection::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(to left, #121212, transparent);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .carouselContainer {
+    scroll-padding-left: 24px;
   }
 
   .track {
-    flex-direction: column;
-    gap: 40px;
+    flex-direction: row;
+    gap: 20px;
     padding: 0 24px;
-    width: auto;
+    width: max-content;
   }
 
   .card {
-    flex: none;
-    width: 100%;
+    flex: 0 0 85vw;
+    max-width: 340px;
   }
 
   .cardImageWrap {
-    height: 240px;
+    height: 220px;
+    border-radius: 18px;
   }
 
   .cardTitle {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+  }
+
+  .cardInfo {
+    margin-top: 16px;
   }
 
   .pagination {
     display: none;
-    /* Hide pagination dots on mobile vertical scroll */
   }
 }
 

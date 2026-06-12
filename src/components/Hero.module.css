@@ -442,90 +442,97 @@
 @media (max-width: 768px) {
   .hero {
     min-height: 100svh;
+    flex-direction: column;
   }
 
   .titlesRow {
-    padding: 0 24px;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0;
-  }
-
-  .titlesLeft {
-    gap: 16px;
+    padding: 0 16px;
+    top: auto;
+    bottom: 20vh;
   }
 
   .bigTitle {
-    font-size: clamp(3.5rem, 20vw, 7rem);
+    font-size: clamp(2.8rem, 14vw, 5rem);
+  }
+
+  .dot {
+    font-size: clamp(2.8rem, 14vw, 5rem);
+  }
+
+  .marqueeContent {
+    gap: 30px;
   }
 
   .characterWrapper {
     position: absolute;
-    top: 8vh;
+    bottom: 0;
+    top: auto;
     left: 50%;
     transform: translateX(-50%);
     width: auto;
-    height: 55vh;
-    padding-top: 0;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .characterCropContainer {
+    height: auto;
+  }
+
+  .characterMask {
+    display: none;
   }
 
   .characterImg {
-    height: 75vh !important;
-    max-height: 75vh;
-    transform: translateY(5%);
+    max-width: none !important;
+    width: 90vw !important;
+    height: auto !important;
+    max-height: none !important;
+    transform: translateY(2%);
+    object-position: bottom;
   }
 
   .infoLeft {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    padding: 0 24px 24px;
-    max-width: 100%;
+    display: none;
   }
 
   .infoRight {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    padding: 0 24px 40px;
-    align-items: flex-start;
-    max-width: 100%;
-  }
-
-  .hero {
-    flex-direction: column;
+    display: none;
   }
 
   .resumeCard {
-    min-width: auto;
-    width: 100%;
+    display: none;
   }
 
   .scrollHint {
     display: none;
   }
+
+  .bottomGradient {
+    height: 15vh;
+  }
 }
 
 @media (max-width: 480px) {
   .titlesRow {
-    padding: 0 16px;
-  }
-
-  .infoLeft {
-    padding: 0 16px 20px;
-  }
-
-  .infoRight {
-    padding: 0 16px 32px;
+    bottom: 16vh;
   }
 
   .bigTitle {
-    font-size: clamp(3rem, 18vw, 5rem);
+    font-size: clamp(2rem, 12vw, 3.5rem);
   }
 
-  .arrowCircle {
-    width: 38px;
-    height: 38px;
+  .dot {
+    font-size: clamp(2rem, 12vw, 3.5rem);
+  }
+
+  .characterImg {
+    max-width: none !important;
+    width: 100vw !important;
+    height: auto !important;
+    max-height: none !important;
+    transform: translateY(2%);
   }
 }
 

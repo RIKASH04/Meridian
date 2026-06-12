@@ -203,20 +203,31 @@
 
 @media (max-width: 768px) {
   .about {
-    padding: 100px 0 0;
+    padding: 80px 0 0;
   }
   .container {
     padding: 0 24px;
   }
   .contentGrid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
   }
   .floatingWrapper {
-    height: 300px;
+    height: 280px;
+  }
+  .floatingDesk {
+    width: 100%;
+    height: 100%;
+    top: 0;
   }
   .heading br {
     display: none;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .descriptionSecondary {
+    font-size: 0.9rem;
   }
 }
 

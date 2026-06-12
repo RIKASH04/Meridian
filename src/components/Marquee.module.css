@@ -56,3 +56,19 @@
   margin-top: 60px;
   background: linear-gradient(to bottom, #FFFFFF, #5E17EB);
 }
+
+@media (max-width: 768px) {
+  .marquee {
+    padding: 40px 0 0;
+  }
+  .content {
+    gap: 24px;
+  }
+  .word {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+  }
+  .transitionSpacer {
+    height: 80px;
+    margin-top: 40px;
+  }
+}

@@ -60,7 +60,7 @@ export default function Works() {
         const card = container.querySelector(`.${styles.card}`);
         if (card) {
           const cardWidth = card.offsetWidth;
-          const gap = 40;
+          const gap = window.innerWidth <= 768 ? 20 : 40;
           const step = cardWidth + gap;
           const N = projects.length;
           container.scrollLeft = N * step;
@@ -88,7 +88,7 @@ export default function Works() {
     if (!card) return;
 
     const cardWidth = card.offsetWidth;
-    const gap = 40; // Gap between cards in pixels
+    const gap = window.innerWidth <= 768 ? 20 : 40; // Gap between cards in pixels
     const step = cardWidth + gap;
     const N = projects.length;
 
@@ -125,7 +125,7 @@ export default function Works() {
     if (!card) return;
 
     const cardWidth = card.offsetWidth;
-    const gap = 40;
+    const gap = window.innerWidth <= 768 ? 20 : 40;
     const step = cardWidth + gap;
     const N = projects.length;
 

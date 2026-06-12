@@ -232,8 +232,40 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 6px 0;
+  }
+
   .navInner {
-    padding: 0 24px;
+    padding: 0 16px;
+    height: 48px;
+  }
+
+  .logo {
+    height: 18px;
+  }
+
+  .logo img {
+    height: 100% !important;
+    width: auto !important;
+  }
+
+  .menuBtn {
+    width: 36px;
+    height: 36px;
+    gap: 4px;
+  }
+
+  .menuLine {
+    width: 18px;
+  }
+
+  .menuBtnOpen .menuLine:first-child {
+    transform: translateY(3px) rotate(45deg);
+  }
+
+  .menuBtnOpen .menuLine:last-child {
+    transform: translateY(-3px) rotate(-45deg);
   }
 
   .desktopLinks {

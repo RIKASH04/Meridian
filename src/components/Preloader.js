@@ -137,7 +137,7 @@ export default function Preloader({ onComplete }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: 'clamp(35rem, 80vw, 68rem)',
+          width: 'clamp(18rem, 80vw, 68rem)',
           height: 'auto',
           transformOrigin: 'center center',
         }}

@@ -191,26 +191,56 @@ export default function Services() {
         }
       });
 
-      // Mobile: simple reveal
+      // Mobile: Stacking cards with vertical scroll pinning
       mm.add('(max-width: 768px)', () => {
-        const cards = trackRef.current?.querySelectorAll(`.${styles.card}`);
-        if (!cards) return;
-        cards.forEach((card) => {
-          gsap.fromTo(
-            card,
-            { y: 50, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 90%',
-              },
-            }
-          );
+        const track = trackRef.current;
+        if (!track) return;
+        const cards = track.querySelectorAll(`.${styles.card}`);
+        if (!cards || cards.length === 0) return;
+
+        // Initial positions: Card 0 sits in view, subsequent cards are off-screen at the bottom
+        cards.forEach((card, i) => {
+          gsap.set(card, {
+            y: i === 0 ? 0 : window.innerHeight,
+            zIndex: 10 + i,
+          });
         });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: `+=${(cards.length - 1) * 100}%`,
+            pin: true,
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Slide each card up to fully cover the previous one — clean replace, no overlap
+        for (let i = 1; i < cards.length; i++) {
+          tl.to(cards[i], {
+            y: 0,
+            ease: 'none',
+          });
+          // Hide the now-covered card so its shadow doesn't bleed through
+          tl.set(cards[i - 1], { opacity: 0 });
+        }
+
+        // Fade out scroll hint on mobile scroll start
+        const hint = sectionRef.current?.querySelector(`.${styles.scrollHint}`);
+        if (hint) {
+          gsap.to(hint, {
+            opacity: 0,
+            scale: 0.9,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top top',
+              end: '+=150',
+              scrub: true,
+            },
+          });
+        }
       });
     }, sectionRef);
 
