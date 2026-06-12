@@ -1,7 +1,7 @@
 .contact {
   width: 100%;
   background: #5E17EB;
-  padding: 160px 0 0;
+  padding: 100px 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -46,10 +46,10 @@
 .imageCol {
   position: absolute;
   left: 0;
-  top: 100px;
-  bottom: 240px;
-  width: 42%;
-  max-width: 500px;
+  top: -140px;
+  bottom: 20px;
+  width: 46%;
+  max-width: 580px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -84,6 +84,14 @@
   margin-bottom: 32px;
 }
 
+.desktopHeading {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+}
+
+.mobileHeading {
+  display: none;
+}
+
 .headingAccent {
   background: linear-gradient(135deg, #8EA0FF 0%, #fff 100%);
   -webkit-background-clip: text;
@@ -99,8 +107,8 @@
 }
 
 .subtitle {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
   line-height: 1.7;
 }
@@ -121,6 +129,7 @@
   letter-spacing: 0.02em;
   transition: all 0.4s ease;
   border: 1px solid transparent;
+  white-space: nowrap;
 }
 
 .primaryBtn:hover {
@@ -140,6 +149,7 @@
   letter-spacing: 0.02em;
   transition: all 0.4s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
 }
 
 .secondaryBtn:hover {
@@ -148,56 +158,150 @@
   transform: translateY(-2px);
 }
 
+/* Row wrapper */
+.contactRow {
+  position: relative;
+  z-index: 3;
+}
+
+/* Mobile-only buttons (below image) — hidden on desktop */
+.mobileButtons {
+  display: none;
+}
+
 /* Responsive */
 @media (max-width: 991px) {
   .contact {
-    display: flex;
-    flex-direction: column;
+    padding-top: 40px;
+  }
+  .contactRow {
+    flex-direction: row;
+    align-items: center;
+    min-height: 540px;
+    padding: 0;
   }
   .imageCol {
     position: relative;
-    width: 100%;
-    max-width: 350px;
+    top: auto;
+    bottom: auto;
+    left: 0;
+    width: 84%;
+    max-width: none;
     height: auto;
-    margin: 0 auto 30px;
+    margin: 0 0 0 -12%;
+    padding: 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
+  }
+  .imageContainer {
+    width: 100%;
+    max-width: none;
+    display: flex;
     align-items: center;
+    justify-content: flex-start;
+  }
+  /* Show mobile buttons below the image — centered */
+  .mobileButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 20px 40px;
+    width: 100%;
+    z-index: 5;
+    position: relative;
+  }
+  .mobileButtons .primaryBtn,
+  .mobileButtons .secondaryBtn {
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+  /* Hide desktop buttons on mobile */
+  .buttons {
+    display: none;
+  }
+  .desktopHeading {
+    display: none !important;
+  }
+  .mobileHeading {
+    display: block !important;
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    text-orientation: upright;
+    -webkit-text-orientation: upright;
+    font-size: clamp(2.2rem, 9.5vw, 3.4rem);
+    line-height: 1.35;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-align: left;
+    height: auto;
+    max-height: 460px;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    padding: 10px 44px 20px 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    pointer-events: none;
   }
   .contactWrapper {
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    gap: 48px;
-    text-align: center;
+    gap: 12px;
+    text-align: right;
+    justify-content: center;
+    align-items: flex-end;
   }
   .contactInner {
     width: 100%;
-    text-align: center;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .headingAccent {
+    background: linear-gradient(135deg, #8EA0FF 0%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    display: none;
   }
   .content {
-    align-items: center;
+    display: none;
   }
-  .imageContainer {
-    max-width: 300px;
+  .transitionSpacer {
+    margin-top: 40px;
   }
 }
 
 @media (max-width: 768px) {
   .contact {
-    padding: 100px 0 0;
+    padding-top: 30px;
   }
-  .container {
-    padding: 0 24px;
+  .contactRow {
+    min-height: 480px;
   }
-  .buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-  .primaryBtn,
-  .secondaryBtn {
-    width: 100%;
-    text-align: center;
-  }
-  .heading br {
-    display: none;
+  .mobileHeading {
+    font-size: clamp(1.8rem, 8.5vw, 2.8rem);
+    max-height: 400px;
   }
 }
 
