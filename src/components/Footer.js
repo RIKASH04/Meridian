@@ -55,8 +55,8 @@ export default function Footer() {
             </div>
 
             <div className={styles.contactDirect}>
-              <a href="mailto:hello@meridian.agency" className={styles.contactInfo}>HELLO@MERIDIAN.AGENCY</a>
-              <a href="tel:+918792989068" className={styles.contactInfo}>+91 87929 89068</a>
+              <a href="mailto:hello@merdian.com" className={styles.contactInfo}>HELLO@MERDIAN.COM</a>
+              <a href="tel:+919686541863" className={styles.contactInfo}>+91 96865 41863</a>
             </div>
           </div>
 
@@ -70,9 +70,8 @@ export default function Footer() {
             <div className={styles.addressBlock}>
               <span className={styles.subLabel}>/ OFFICE</span>
               <p className={styles.addressText}>
-                P.A. COLLEGE OF ENGINEERING,<br />
-                NADUPADAV, MONTEPADAV POST,<br />
-                KAIRANGALA, MANGALORE - 574153
+                PUTTUR - 574201,<br />
+                KARNATAKA, INDIA
               </p>
             </div>
           </div>
@@ -82,9 +81,8 @@ export default function Footer() {
             <div className={styles.addressBlock}>
               <span className={styles.subLabel}>/ OFFICE</span>
               <p className={styles.addressText}>
-                P.A. COLLEGE OF ENGINEERING,<br />
-                NADUPADAV, MONTEPADAV POST,<br />
-                KAIRANGALA, MANGALORE - 574153
+                MOODBIDRE,<br />
+                KARNATAKA, INDIA
               </p>
             </div>
           </div>
@@ -105,7 +103,7 @@ export default function Footer() {
 
         {/* Floating WhatsApp chat button */}
         <a 
-          href="https://wa.me/918792989068" 
+          href="https://wa.me/919686541863" 
           target="_blank" 
           rel="noreferrer" 
           className={styles.whatsappBtn}

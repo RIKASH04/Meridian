@@ -105,7 +105,7 @@ export default function Navbar({ visible }) {
               <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
               <a href="https://twitter.com" target="_blank" rel="noreferrer">X ↗</a>
             </div>
-            <p className={styles.menuEmail}>hello@meridian.agency</p>
+            <p className={styles.menuEmail}>hello@merdian.com</p>
           </div>
         </div>
       </div>
