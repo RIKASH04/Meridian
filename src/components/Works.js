@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Works.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -51,6 +52,9 @@ export default function Works() {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
+  const dragStartX = useRef(0);
+  const dragStartY = useRef(0);
+  const hasDragged = useRef(false);
 
   useEffect(() => {
     // Initialize scroll position to the middle copy on load
@@ -153,6 +157,11 @@ export default function Works() {
     container.style.cursor = 'grabbing';
     startX.current = e.pageX - container.offsetLeft;
     scrollLeftStart.current = container.scrollLeft;
+
+    // Track start position to detect actual drag vs click
+    hasDragged.current = false;
+    dragStartX.current = e.pageX;
+    dragStartY.current = e.pageY;
   };
 
   const handleMouseLeave = () => {
@@ -182,6 +191,13 @@ export default function Works() {
     const container = carouselRef.current;
     if (!container) return;
 
+    // Detect if we actually dragged more than a tiny threshold
+    const dx = Math.abs(e.pageX - dragStartX.current);
+    const dy = Math.abs(e.pageY - dragStartY.current);
+    if (dx > 5 || dy > 5) {
+      hasDragged.current = true;
+    }
+
     const x = e.pageX - container.offsetLeft;
     const walk = (x - startX.current) * 1.5; // Drag speed multiplier
     container.scrollLeft = scrollLeftStart.current - walk;
@@ -193,15 +209,15 @@ export default function Works() {
       <div className={styles.container}>
         <div className={styles.topSection}>
           <div className={styles.topLeft}>
-            <span className={styles.label}>Featured Works</span>
+            <span className={styles.label}>Our Works</span>
             <h2 className={styles.heading}>
-              Featured <span className={styles.headingAccent}>Works</span>
+              Our <span className={styles.headingAccent}>Works</span>
             </h2>
           </div>
-          <a href="#" className={styles.seeAll} data-cursor-hover>
+          <Link href="/projects" className={styles.seeAll} data-cursor-hover>
             See All Projects
             <span className={styles.seeAllArrow}>→</span>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -221,7 +237,17 @@ export default function Works() {
             {extendedProjects.map((project, i) => {
               const isCardActive = (i % projects.length) === activeIndex;
               return (
-                <div key={i} className={styles.card} data-cursor-hover>
+                <Link
+                  key={i}
+                  href={`/${project.title.toLowerCase()}`}
+                  className={styles.card}
+                  data-cursor-hover
+                  onClick={(e) => {
+                    if (hasDragged.current) {
+                      e.preventDefault();
+                    }
+                  }}
+                >
                   <div className={styles.cardImageWrap}>
                     <Image
                       src={project.image}
@@ -241,7 +267,7 @@ export default function Works() {
                       {project.category}
                     </span>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

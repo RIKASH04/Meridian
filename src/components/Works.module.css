@@ -141,6 +141,8 @@
   position: relative;
   transition: transform 0.4s ease;
   scroll-snap-align: start;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .cardImageWrap {
@@ -346,4 +348,47 @@
   height: 120px;
   background: linear-gradient(to bottom, #121212, #232323);
   pointer-events: none;
+}
+
+.servicesCtaWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  padding: 0 60px;
+}
+
+.servicesBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #5E17EB 0%, #7c3aed 50%, #5E17EB 100%);
+  background-size: 200% 200%;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 28px 36px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(94, 23, 235, 0.25);
+  letter-spacing: 0.04em;
+}
+
+.servicesBtn:hover {
+  background-position: 100% 100%;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(94, 23, 235, 0.4);
+}
+
+.servicesBtnArrow {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.servicesBtn:hover .servicesBtnArrow {
+  transform: translateX(6px);
 }

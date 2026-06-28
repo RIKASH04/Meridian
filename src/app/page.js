@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 // Dynamic imports to prevent SSR issues with GSAP
@@ -16,12 +16,18 @@ const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 
 export default function Home() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
+  // Skip preloader if it already played this session (e.g. navigating back)
+  const alreadyPlayed = typeof window !== 'undefined' && sessionStorage.getItem('preloaderDone') === 'true';
+  const [preloaderDone, setPreloaderDone] = useState(alreadyPlayed);
 
+  const handlePreloaderComplete = () => {
+    sessionStorage.setItem('preloaderDone', 'true');
+    setPreloaderDone(true);
+  };
   return (
     <>
       <CustomCursor />
-      <Preloader onComplete={() => setPreloaderDone(true)} />
+      {!alreadyPlayed && <Preloader onComplete={handlePreloaderComplete} />}
 
       {/* Main Content */}
       <main>

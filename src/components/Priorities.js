@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Priorities.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,10 +75,10 @@ export default function Priorities() {
 
         <div className={styles.ctaSection}>
           <p className={styles.ctaText}>Ready to build something extraordinary?</p>
-          <a href="#contact" className={styles.ctaBtn} data-cursor-hover>
-            Contact Us Now
-            <span className={styles.ctaBtnArrow}>➜</span>
-          </a>
+          <Link href="/services" className={styles.servicesBtn} data-cursor-hover>
+            Our Services
+            <span className={styles.servicesBtnArrow}>→</span>
+          </Link>
         </div>
       </div>
       <div className={styles.transitionSpacer} />

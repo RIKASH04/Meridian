@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 const navLinks = [
@@ -16,7 +17,24 @@ export default function Navbar({ visible }) {
   const navRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const linksRef = useRef([]);
+  const pathname = usePathname();
+  const isSubpage = pathname !== '/';
+  // Pages with white/light backgrounds need dark logo & nav text always
+  const whiteBgPages = ['/services', '/projects'];
+  const isLightBg = whiteBgPages.includes(pathname);
+
+  // Track scroll position to reveal frosted glass bg
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // check initial position
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   useEffect(() => {
     if (menuOpen) {
       gsap.to(menuRef.current, {
@@ -56,6 +74,11 @@ export default function Navbar({ visible }) {
   }, [menuOpen]);
 
   const handleLinkClick = (e, href) => {
+    if (pathname !== '/') {
+      setMenuOpen(false);
+      // Let standard browser navigation go to /#hash
+      return;
+    }
     e.preventDefault();
     setMenuOpen(false);
     const element = document.querySelector(href);
@@ -64,13 +87,17 @@ export default function Navbar({ visible }) {
     }
   };
 
+  const getHref = (href) => {
+    return pathname === '/' ? href : `/${href}`;
+  };
+
   return (
     <>
-      <nav ref={navRef} className={styles.navbar}>
+      <nav ref={navRef} className={`${styles.navbar} ${isSubpage ? styles.navbarSubpage : ''} ${isSubpage && scrolled ? styles.navbarScrolled : ''} ${isLightBg ? styles.navbarLightBg : ''}`}>
         <div className={styles.navInner}>
           {/* Logo */}
-          <a href="#hero" className={styles.logo} onClick={(e) => handleLinkClick(e, '#hero')}>
-            <Image src="/log3.svg" alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain', height: 'auto' }} />
+          <a href={getHref('#hero')} className={styles.logo} onClick={(e) => handleLinkClick(e, '#hero')}>
+            <Image src={isLightBg || (isSubpage && scrolled) ? '/mylogo.svg' : '/log3.svg'} alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain', height: 'auto' }} />
           </a>
 
           {/* Desktop Links */}
@@ -78,7 +105,7 @@ export default function Navbar({ visible }) {
             {navLinks.map((link) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={getHref(link.href)}
                 className={styles.navLink}
                 onClick={(e) => handleLinkClick(e, link.href)}
               >
@@ -89,7 +116,7 @@ export default function Navbar({ visible }) {
 
           {/* CTA + Menu */}
           <div className={styles.navRight}>
-            <a href="#contact" className={styles.ctaBtn} onClick={(e) => handleLinkClick(e, '#contact')}>
+            <a href={getHref('#contact')} className={styles.ctaBtn} onClick={(e) => handleLinkClick(e, '#contact')}>
               Let&apos;s talk
             </a>
             <button
@@ -120,7 +147,7 @@ export default function Navbar({ visible }) {
             {navLinks.map((link, i) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={getHref(link.href)}
                 ref={(el) => (linksRef.current[i] = el)}
                 className={styles.menuLink}
                 onClick={(e) => handleLinkClick(e, link.href)}
@@ -136,7 +163,7 @@ export default function Navbar({ visible }) {
               <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
               <a href="https://twitter.com" target="_blank" rel="noreferrer">X ↗</a>
             </div>
-            <p className={styles.menuEmail}>hello@merdian.com</p>
+            <p className={styles.menuEmail}>hello@meridian.com</p>
           </div>
         </div>
       </div>
