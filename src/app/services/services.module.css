@@ -9,8 +9,10 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100dvh; /* Use dynamic viewport height to handle mobile address bar */
   overflow: hidden;
   background-color: #fbfcff;
+  touch-action: pan-y; /* Allow vertical scroll, prevent horizontal swipe conflicts */
 }
 
 .serviceCard {
@@ -19,12 +21,15 @@
   left: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden; /* No overflow-y: auto — it breaks pinning */
   box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.06);
+  transform: translateZ(0); /* Force GPU layer */
+  -webkit-transform: translateZ(0);
 }
 
 .cardContentWrapper {
@@ -167,11 +172,7 @@
 
 .mockupImage {
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.serviceCard:hover .mockupImage {
-  transform: scale(1.03);
+  /* Remove hover transition on images inside pinned cards — causes repaint jank */
 }
 
 /* ─── Footer ─── */
@@ -191,41 +192,70 @@
   }
   .imageContainer {
     height: 400px;
-    border-radius: 0;
   }
 }
 
 @media (max-width: 768px) {
   .serviceCard {
     align-items: flex-start;
-    padding-top: 100px;
-    overflow-y: auto;
+    padding-top: 90px;
+    /* IMPORTANT: No overflow-y: auto here. It breaks GSAP ScrollTrigger pinning */
   }
   .cardContentWrapper {
-    padding: 0 24px;
+    padding: 0 20px;
+    padding-bottom: 24px;
   }
   .grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 20px;
+  }
+  .serviceHeader {
+    margin-bottom: 16px;
+  }
+  .serviceTitle {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
   .imageContainer {
-    height: 220px;
-    border-radius: 0;
+    height: 180px;
   }
   .subcatsGrid {
-    margin-bottom: 20px;
-    gap: 6px 16px;
+    margin-bottom: 16px;
+    gap: 4px 12px;
+  }
+  .subcatPill {
+    font-size: 0.68rem;
   }
   .serviceDescription {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    line-height: 1.55;
   }
   .decorDot {
-    width: 10px;
-    height: 10px;
-    margin-top: 10px;
+    width: 8px;
+    height: 8px;
+    margin-top: 8px;
   }
   .learnMoreBtn {
-    padding: 16px 28px;
-    font-size: 0.82rem;
+    padding: 14px 24px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .serviceCard {
+    padding-top: 80px;
+  }
+  .cardContentWrapper {
+    padding: 0 16px;
+    padding-bottom: 16px;
+  }
+  .imageContainer {
+    height: 150px;
+  }
+  .serviceTitle {
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
+  }
+  .serviceDescription {
+    font-size: 0.8rem;
   }
 }

@@ -24,19 +24,19 @@ export default function Footer() {
             <span className={styles.sectionLabel}>/ PAGES</span>
             <div className={styles.pagesLinks}>
               <div className={styles.linkWrapper}>
-                <a href="#about" className={styles.hugeLink}>ABOUT US</a>
+                <a href="#hero" className={styles.hugeLink}>HOME</a>
                 <span className={styles.decorDot} style={{ left: '60%', top: '20%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
-                <a href="#works" className={styles.hugeLink}>WORKS</a>
+                <a href="#services" className={styles.hugeLink}>SERVICES</a>
                 <span className={styles.decorDot} style={{ left: '40%', top: '60%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
-                <a href="#services" className={styles.hugeLink}>SERVICES</a>
+                <a href="#works" className={styles.hugeLink}>WORKS</a>
                 <span className={styles.decorDot} style={{ left: '55%', top: '90%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
-                <a href="#" className={styles.hugeLink}>BLOG</a>
+                <a href="/projects" className={styles.hugeLink}>PROJECTS</a>
               </div>
               <div className={styles.linkWrapper}>
                 <a href="#contact" className={styles.hugeLink}>CONTACT US</a>
@@ -51,12 +51,13 @@ export default function Footer() {
               <a href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>X</a>
               <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>LINKEDIN</a>
               <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>FACEBOOK</a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>INSTAGRAM</a>
+              <a href="https://www.instagram.com/meridian._.solutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>INSTAGRAM</a>
             </div>
 
             <div className={styles.contactDirect}>
               <a href="mailto:hello@merdian.com" className={styles.contactInfo}>HELLO@MERDIAN.COM</a>
               <a href="tel:+919686541863" className={styles.contactInfo}>+91 96865 41863</a>
+              <a href="tel:+918197424986" className={styles.contactInfo}>+91 81974 24986</a>
             </div>
           </div>
 

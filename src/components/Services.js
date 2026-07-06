@@ -206,11 +206,14 @@ export default function Services() {
         const cards = track.querySelectorAll(`.${styles.card}`);
         if (!cards || cards.length === 0) return;
 
-        // Initial positions: Card 0 sits in view, subsequent cards are off-screen at the bottom
+        // Force GPU layers for smooth transforms
         cards.forEach((card, i) => {
+          card.style.willChange = 'transform, opacity';
+          card.style.backfaceVisibility = 'hidden';
           gsap.set(card, {
-            y: i === 0 ? 0 : window.innerHeight,
+            yPercent: i === 0 ? 0 : 100,
             zIndex: 10 + i,
+            force3D: true,
           });
         });
 
@@ -218,21 +221,28 @@ export default function Services() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',
-            end: `+=${(cards.length - 1) * 100}%`,
+            end: () => `+=${cards.length * window.innerHeight * 0.75}`,
             pin: true,
-            scrub: true,
+            scrub: 0.5,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        // Slide each card up to fully cover the previous one — clean replace, no overlap
+        // Slide each card up to fully cover the previous one
         for (let i = 1; i < cards.length; i++) {
           tl.to(cards[i], {
-            y: 0,
+            yPercent: 0,
+            duration: 1,
             ease: 'none',
+            force3D: true,
           });
-          // Hide the now-covered card so its shadow doesn't bleed through
-          tl.set(cards[i - 1], { opacity: 0 });
+          tl.to(cards[i - 1], {
+            scale: 0.92,
+            opacity: 0.3,
+            duration: 1,
+            force3D: true,
+          }, '<');
         }
 
         // Fade out scroll hint on mobile scroll start
@@ -352,7 +362,7 @@ export default function Services() {
             <div className={styles.rumbleWrapper}>
               {/* Base truck */}
               <Image
-                src="/carr.png"
+                src="/images/services/carr.png"
                 alt="Yellow delivery truck"
                 width={400}
                 height={400}
@@ -363,7 +373,7 @@ export default function Services() {
               {/* Left Wheel Overlay */}
               <div className={`${styles.wheel} ${styles.leftWheel}`}>
                 <Image
-                  src="/carr.png"
+                  src="/images/services/carr.png"
                   alt=""
                   width={400}
                   height={400}
@@ -375,7 +385,7 @@ export default function Services() {
               {/* Right Wheel Overlay */}
               <div className={`${styles.wheel} ${styles.rightWheel}`}>
                 <Image
-                  src="/carr.png"
+                  src="/images/services/carr.png"
                   alt=""
                   width={400}
                   height={400}
@@ -415,7 +425,7 @@ export default function Services() {
             {/* Background image and content overlay */}
             <div className={styles.phoneArea}>
               <Image
-                src="/imgggg.jpg"
+                src="/images/services/imgggg.jpg"
                 alt=""
                 fill
                 sizes="(max-width: 768px) 100vw, 420px"
@@ -442,7 +452,7 @@ export default function Services() {
             {/* Bottom info area — logo + description */}
             <div className={styles.cardInfo}>
               <Image
-                src="/log2.svg"
+                src="/images/logos/log2.svg"
                 alt=""
                 width={40}
                 height={28}

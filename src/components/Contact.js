@@ -14,7 +14,7 @@ export default function Contact() {
         <div className={styles.imageCol}>
           <div className={styles.imageContainer}>
             <Image
-              src="/neee1_nobg.png"
+              src="/images/contact/neee1_nobg.png"
               alt="Build together"
               width={450}
               height={600}

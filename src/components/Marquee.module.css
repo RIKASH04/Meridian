@@ -3,6 +3,9 @@
   background: #FFFFFF;
   padding: 60px 0 0;
   overflow: hidden;
+  position: relative;
+  z-index: 4;
+  margin-top: -2px;
 }
 
 .track {
@@ -61,12 +64,15 @@
   .marquee {
     padding: 40px 0 0;
   }
+
   .content {
     gap: 24px;
   }
+
   .word {
     font-size: clamp(1.6rem, 5vw, 2.4rem);
   }
+
   .transitionSpacer {
     height: 80px;
     margin-top: 40px;

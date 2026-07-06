@@ -43,7 +43,7 @@ export default function About() {
             <div className={styles.floatingWrapper}>
               <div className={styles.floatingDesk}>
                 <Image
-                  src="/floating-desk-final-transparent.png"
+                  src="/images/about/floating-desk-final-transparent.png"
                   alt="3D floating desk and laptop setup"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

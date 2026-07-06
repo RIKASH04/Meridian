@@ -7,7 +7,6 @@ import styles from './Navbar.module.css';
 
 const navLinks = [
   { label: 'Home', href: '#hero' },
-  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Works', href: '#works' },
   { label: 'Contact', href: '#contact' },
@@ -97,7 +96,7 @@ export default function Navbar({ visible }) {
         <div className={styles.navInner}>
           {/* Logo */}
           <a href={getHref('#hero')} className={styles.logo} onClick={(e) => handleLinkClick(e, '#hero')}>
-            <Image src={isLightBg || (isSubpage && scrolled) ? '/mylogo.svg' : '/log3.svg'} alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain', height: 'auto' }} />
+            <Image src={isLightBg || (isSubpage && scrolled) ? '/images/logos/mylogo.svg' : '/images/logos/log3.svg'} alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain' }} />
           </a>
 
           {/* Desktop Links */}
@@ -159,7 +158,7 @@ export default function Navbar({ visible }) {
           </div>
           <div className={styles.menuFooter}>
             <div className={styles.menuSocial}>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram ↗</a>
+              <a href="https://www.instagram.com/meridian._.solutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer">Instagram ↗</a>
               <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
               <a href="https://twitter.com" target="_blank" rel="noreferrer">X ↗</a>
             </div>

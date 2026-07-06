@@ -12,32 +12,32 @@ const projects = [
   {
     title: 'neighbourfriendly',
     category: 'Website',
-    image: '/neighbourfriendly.png',
+    image: '/images/works/neighbourfriendly.png',
   },
   {
     title: 'krishimitra',
     category: 'Mobile App',
-    image: '/krishimitra.png',
+    image: '/images/works/krishimitra.png',
   },
   {
     title: 'Clensifilters',
     category: 'E-commerce',
-    image: '/clensifilters_sketch.png',
+    image: '/images/works/clensifilters_sketch.png',
   },
   {
     title: 'wagyuprimeuae',
     category: 'E-commerce',
-    image: '/wagyuprimeuae.png',
+    image: '/images/works/wagyuprimeuae.png',
   },
   {
     title: 'alfredai',
     category: 'AI Chatbot',
-    image: '/alfredai.png',
+    image: '/images/works/alfred.jpg',
   },
   {
     title: 'q-pro',
     category: 'Smart Queue System',
-    image: '/qpro.png',
+    image: '/images/works/qpro.png',
   },
 ];
 
@@ -50,6 +50,7 @@ export default function Works() {
 
   // Drag-to-scroll state refs
   const isDragging = useRef(false);
+  const isTouching = useRef(false);
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
   const dragStartX = useRef(0);
@@ -82,11 +83,6 @@ export default function Works() {
     const container = carouselRef.current;
     if (!container) return;
 
-    // Do not warp mid-drag to prevent cursor judder
-    if (isDragging.current) {
-      return;
-    }
-
     const scrollLeft = container.scrollLeft;
     const card = container.querySelector(`.${styles.card}`);
     if (!card) return;
@@ -96,28 +92,31 @@ export default function Works() {
     const step = cardWidth + gap;
     const N = projects.length;
 
-    // Check bounds for infinite loop wrap-around
-    if (scrollLeft < N * step) {
-      // Temporarily disable scroll snapping to prevent stutter/stuck animation
-      container.style.scrollSnapType = 'none';
-      container.scrollLeft = scrollLeft + N * step;
-      setTimeout(() => {
-        container.style.scrollSnapType = 'x mandatory';
-      }, 30);
-      return;
-    } else if (scrollLeft >= 2 * N * step) {
-      // Temporarily disable scroll snapping to prevent stutter/stuck animation
-      container.style.scrollSnapType = 'none';
-      container.scrollLeft = scrollLeft - N * step;
-      setTimeout(() => {
-        container.style.scrollSnapType = 'x mandatory';
-      }, 30);
+    // Calculate which card of the copy is active using modulo
+    const index = Math.round(scrollLeft / step) % N;
+    // Handle negative values if any
+    const normalizedIndex = index < 0 ? (index + N) % N : index;
+    setActiveIndex(normalizedIndex);
+
+    // Do not warp mid-drag or mid-touch to prevent visual jumpiness
+    if (isDragging.current || isTouching.current) {
       return;
     }
 
-    // Calculate which card of the middle copy is active
-    const index = Math.round((container.scrollLeft - N * step) / step);
-    setActiveIndex(Math.min(Math.max(index, 0), N - 1));
+    // Only warp when close to the absolute ends of the 3x copy list
+    if (scrollLeft < 0.8 * step) {
+      container.style.scrollSnapType = 'none';
+      container.scrollLeft = scrollLeft + N * step;
+      setTimeout(() => {
+        if (container) container.style.scrollSnapType = 'x mandatory';
+      }, 50);
+    } else if (scrollLeft > (3 * N - 1.8) * step) {
+      container.style.scrollSnapType = 'none';
+      container.scrollLeft = scrollLeft - N * step;
+      setTimeout(() => {
+        if (container) container.style.scrollSnapType = 'x mandatory';
+      }, 50);
+    }
   };
 
   // Scroll smoothly to the clicked card
@@ -143,7 +142,7 @@ export default function Works() {
 
     // Re-enable snap after the smooth scroll finishes
     setTimeout(() => {
-      container.style.scrollSnapType = 'x mandatory';
+      if (container) container.style.scrollSnapType = 'x mandatory';
     }, 600);
   };
 
@@ -231,6 +230,9 @@ export default function Works() {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
+          onTouchStart={() => { isTouching.current = true; }}
+          onTouchEnd={() => { isTouching.current = false; }}
+          onTouchCancel={() => { isTouching.current = false; }}
           style={{ cursor: 'grab' }}
         >
           <div className={styles.track}>

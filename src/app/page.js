@@ -7,7 +7,7 @@ const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: f
 const Preloader = dynamic(() => import('@/components/Preloader'), { ssr: false });
 const Navbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
 const Hero = dynamic(() => import('@/components/Hero'), { ssr: false });
-const About = dynamic(() => import('@/components/About'), { ssr: false });
+const ScrollVideo = dynamic(() => import('@/components/ScrollVideo'), { ssr: false });
 const Marquee = dynamic(() => import('@/components/Marquee'), { ssr: false });
 const Services = dynamic(() => import('@/components/Services'), { ssr: false });
 const Works = dynamic(() => import('@/components/Works'), { ssr: false });
@@ -16,24 +16,35 @@ const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 
 export default function Home() {
-  // Skip preloader if it already played this session (e.g. navigating back)
-  const alreadyPlayed = typeof window !== 'undefined' && sessionStorage.getItem('preloaderDone') === 'true';
-  const [preloaderDone, setPreloaderDone] = useState(alreadyPlayed);
+  // Start false on both server and client to avoid hydration mismatch,
+  // then check sessionStorage in useEffect (client-only).
+  const [showPreloader, setShowPreloader] = useState(true);
+  const [preloaderDone, setPreloaderDone] = useState(false);
+
+  useEffect(() => {
+    // If preloader already played this session, skip it
+    if (sessionStorage.getItem('preloaderDone') === 'true') {
+      setShowPreloader(false);
+      setPreloaderDone(true);
+    }
+  }, []);
 
   const handlePreloaderComplete = () => {
     sessionStorage.setItem('preloaderDone', 'true');
+    setShowPreloader(false);
     setPreloaderDone(true);
   };
+
   return (
     <>
       <CustomCursor />
-      {!alreadyPlayed && <Preloader onComplete={handlePreloaderComplete} />}
+      {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
 
       {/* Main Content */}
       <main>
         <Navbar visible={preloaderDone} />
         <Hero visible={preloaderDone} />
-        <About />
+        <ScrollVideo />
         <Marquee />
         <Services />
         <Works />

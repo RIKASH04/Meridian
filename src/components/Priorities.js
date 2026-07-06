@@ -12,19 +12,19 @@ const priorities = [
   {
     title: 'Quality',
     description: 'Every pixel, every line of code — obsessively refined.',
-    image: '/quality.jpg',
+    image: '/images/priorities/quality.jpg',
     icon: '◆',
   },
   {
     title: 'Innovation',
     description: 'We push boundaries, never settling for ordinary.',
-    image: '/brain.png',
+    image: '/images/priorities/brain.png',
     icon: '◇',
   },
   {
     title: 'Impact',
     description: 'Measurable results that transform businesses.',
-    image: '/impact.jpg',
+    image: '/images/priorities/impact.jpg',
     icon: '○',
   },
 ];

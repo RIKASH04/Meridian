@@ -41,7 +41,7 @@ export default function Hero({ visible }) {
         <div className={styles.characterCropContainer}>
           <div className={styles.characterMask}></div>
           <Image
-            src="/hello-removebg-preview.png"
+            src="/images/hero/hello-removebg-preview.png"
             alt="Lead Designer Portrait"
             width={700}
             height={900}

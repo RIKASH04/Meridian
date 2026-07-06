@@ -144,73 +144,61 @@ export default function ServicesPage() {
     const cards = cardsRef.current.filter(Boolean);
     if (cards.length === 0) return;
 
+    // Force GPU compositing on every card for buttery smooth transforms
+    cards.forEach((card) => {
+      card.style.willChange = 'transform, opacity';
+      card.style.backfaceVisibility = 'hidden';
+    });
+
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-
-      // Desktop: Stacking from bottom
-      mm.add('(min-width: 769px)', () => {
-        cards.forEach((card, i) => {
-          gsap.set(card, {
-            y: i === 0 ? 0 : '100vh',
-            zIndex: 10 + i,
-          });
+      // Set initial states: first card visible, rest stacked below viewport
+      cards.forEach((card, i) => {
+        gsap.set(card, {
+          yPercent: i === 0 ? 0 : 100,
+          zIndex: 10 + i,
+          force3D: true,
         });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: `+=${(cards.length - 1) * 100}%`,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        for (let i = 1; i < cards.length; i++) {
-          tl.to(cards[i], {
-            y: 0,
-            ease: 'power1.inOut',
-          });
-          tl.to(cards[i - 1], {
-            opacity: 0.6,
-            scale: 0.96,
-            duration: 0.5,
-          }, '<');
-        }
       });
 
-      // Mobile: Stacking from bottom (same logic)
-      mm.add('(max-width: 768px)', () => {
-        cards.forEach((card, i) => {
-          gsap.set(card, {
-            y: i === 0 ? 0 : window.innerHeight,
-            zIndex: 10 + i,
-          });
-        });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: `+=${(cards.length - 1) * 100}%`,
-            pin: true,
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        for (let i = 1; i < cards.length; i++) {
-          tl.to(cards[i], {
-            y: 0,
-            ease: 'none',
-          });
-          tl.set(cards[i - 1], { opacity: 0 });
-        }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          // Use a fixed pixel value per card instead of percentage to prevent
+          // mobile address-bar resize issues with 100vh/100%
+          end: () => `+=${cards.length * window.innerHeight * 0.75}`,
+          pin: true,
+          scrub: 0.5, // Low scrub value for responsive feel without jank
+          invalidateOnRefresh: true,
+          anticipatePin: 1, // Prevents the "jump" when pin starts
+        },
       });
+
+      for (let i = 1; i < cards.length; i++) {
+        // Slide the next card up over the current one
+        tl.to(cards[i], {
+          yPercent: 0,
+          duration: 1,
+          ease: 'none',
+          force3D: true,
+        });
+        // Simultaneously scale down & fade the card being covered
+        tl.to(cards[i - 1], {
+          scale: 0.92,
+          opacity: 0.4,
+          duration: 1,
+          force3D: true,
+        }, '<');
+      }
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      // Clean up will-change to free GPU memory
+      cards.forEach((card) => {
+        if (card) card.style.willChange = 'auto';
+      });
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -222,7 +210,7 @@ export default function ServicesPage() {
       <div ref={containerRef} className={styles.servicesContainer}>
         {SERVICES_DATA.map((service, i) => (
           <div
-            key={service.title}
+            key={service.index}
             ref={(el) => (cardsRef.current[i] = el)}
             className={styles.serviceCard}
           >

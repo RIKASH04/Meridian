@@ -4,8 +4,10 @@
   position: relative;
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
+  touch-action: pan-y;
 }
 
 /* ─── Horizontal Scroll Track ─── */
@@ -313,6 +315,7 @@
 @media (max-width: 768px) {
   .services {
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     position: relative;
     padding: 0;
@@ -348,7 +351,7 @@
   .card {
     position: absolute;
     top: 190px;
-    bottom: 4vh;
+    bottom: 20px;
     left: 24px;
     right: 24px;
     width: auto;
@@ -358,6 +361,9 @@
     margin: 0;
     --tilt: 0deg !important;
     border-radius: 22px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
     box-shadow:
       0 -8px 30px rgba(0, 0, 0, 0.08),
       0 15px 35px rgba(0, 0, 0, 0.06),
@@ -413,7 +419,7 @@
     left: 16px;
     right: 16px;
     top: 175px;
-    bottom: 3vh;
+    bottom: 16px;
     min-height: unset;
     border-radius: 18px;
   }
