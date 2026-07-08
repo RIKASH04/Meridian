@@ -24,22 +24,22 @@ export default function Footer() {
             <span className={styles.sectionLabel}>/ PAGES</span>
             <div className={styles.pagesLinks}>
               <div className={styles.linkWrapper}>
-                <a href="#hero" className={styles.hugeLink}>HOME</a>
+                <a href="/" className={styles.hugeLink}>HOME</a>
                 <span className={styles.decorDot} style={{ left: '60%', top: '20%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
-                <a href="#services" className={styles.hugeLink}>SERVICES</a>
+                <a href="/services" className={styles.hugeLink}>SERVICES</a>
                 <span className={styles.decorDot} style={{ left: '40%', top: '60%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
-                <a href="#works" className={styles.hugeLink}>WORKS</a>
+                <a href="/projects" className={styles.hugeLink}>WORKS</a>
                 <span className={styles.decorDot} style={{ left: '55%', top: '90%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
                 <a href="/projects" className={styles.hugeLink}>PROJECTS</a>
               </div>
               <div className={styles.linkWrapper}>
-                <a href="#contact" className={styles.hugeLink}>CONTACT US</a>
+                <a href="/#contact" className={styles.hugeLink}>CONTACT US</a>
               </div>
             </div>
           </div>

@@ -2,14 +2,14 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 const navLinks = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Services', href: '#services' },
-  { label: 'Works', href: '#works' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Works', href: '/projects' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar({ visible }) {
@@ -19,6 +19,7 @@ export default function Navbar({ visible }) {
   const [scrolled, setScrolled] = useState(false);
   const linksRef = useRef([]);
   const pathname = usePathname();
+  const router = useRouter();
   const isSubpage = pathname !== '/';
   // Pages with white/light backgrounds need dark logo & nav text always
   const whiteBgPages = ['/services', '/projects'];
@@ -72,22 +73,48 @@ export default function Navbar({ visible }) {
     }
   }, [menuOpen]);
 
-  const handleLinkClick = (e, href) => {
-    if (pathname !== '/') {
-      setMenuOpen(false);
-      // Let standard browser navigation go to /#hash
-      return;
-    }
+  const handleLinkClick = (e, label, href) => {
     e.preventDefault();
     setMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+
+    if (label === 'Home') {
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/');
+      }
+    } else if (label === 'Services') {
+      if (pathname === '/services') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/services');
+      }
+    } else if (label === 'Works') {
+      if (pathname === '/projects') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/projects');
+      }
+    } else if (label === 'Contact') {
+      if (pathname === '/') {
+        const element = document.querySelector('#contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        router.push('/#contact');
+      }
     }
   };
 
-  const getHref = (href) => {
-    return pathname === '/' ? href : `/${href}`;
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      router.push('/');
+    }
   };
 
   return (
@@ -95,7 +122,7 @@ export default function Navbar({ visible }) {
       <nav ref={navRef} className={`${styles.navbar} ${isSubpage ? styles.navbarSubpage : ''} ${isSubpage && scrolled ? styles.navbarScrolled : ''} ${isLightBg ? styles.navbarLightBg : ''}`}>
         <div className={styles.navInner}>
           {/* Logo */}
-          <a href={getHref('#hero')} className={styles.logo} onClick={(e) => handleLinkClick(e, '#hero')}>
+          <a href="/" className={styles.logo} onClick={handleLogoClick}>
             <Image src={isLightBg || (isSubpage && scrolled) ? '/images/logos/mylogo.svg' : '/images/logos/log3.svg'} alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain' }} />
           </a>
 
@@ -104,9 +131,9 @@ export default function Navbar({ visible }) {
             {navLinks.map((link) => (
               <a
                 key={link.label}
-                href={getHref(link.href)}
+                href={link.href}
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, link.href)}
+                onClick={(e) => handleLinkClick(e, link.label, link.href)}
               >
                 {link.label}
               </a>
@@ -115,7 +142,7 @@ export default function Navbar({ visible }) {
 
           {/* CTA + Menu */}
           <div className={styles.navRight}>
-            <a href={getHref('#contact')} className={styles.ctaBtn} onClick={(e) => handleLinkClick(e, '#contact')}>
+            <a href="/#contact" className={styles.ctaBtn} onClick={(e) => handleLinkClick(e, 'Contact', '/#contact')}>
               Let&apos;s talk
             </a>
             <button
@@ -146,10 +173,10 @@ export default function Navbar({ visible }) {
             {navLinks.map((link, i) => (
               <a
                 key={link.label}
-                href={getHref(link.href)}
+                href={link.href}
                 ref={(el) => (linksRef.current[i] = el)}
                 className={styles.menuLink}
-                onClick={(e) => handleLinkClick(e, link.href)}
+                onClick={(e) => handleLinkClick(e, link.label, link.href)}
               >
                 <span className={styles.menuLinkNumber}>0{i + 1}</span>
                 <span className={styles.menuLinkText}>{link.label}</span>

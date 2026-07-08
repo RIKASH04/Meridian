@@ -11,11 +11,11 @@ import styles from './projects.module.css';
 const PROJECTS = [
   {
     slug: 'neighbourfriendly',
-    title: 'NeighborFriendly',
+    title: 'NeighborFriendlyRentals',
     category: 'Web Platform',
     filterTag: 'Web Platform',
     image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1000&q=80',
-    subtitle: 'Reimagining local community engagement and peer-to-peer neighborhood support.'
+    subtitle: 'A trust-first peer-to-peer neighborhood rental marketplace with verified users and digital agreements.'
   },
   {
     slug: 'krishimitra',
@@ -23,15 +23,15 @@ const PROJECTS = [
     category: 'Mobile Application',
     filterTag: 'Mobile Application',
     image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1000&q=80',
-    subtitle: 'Empowering rural farmers with real-time agronomy, market pricing, and diagnostics.'
+    subtitle: 'Kannada-first voice assistant AI app empowering farmers with crop disease detection, price predictions, and soil analytics.'
   },
   {
     slug: 'clensifilters',
     title: 'Clensifilters',
-    category: 'E-commerce / B2B',
+    category: 'Shower Filter UAE',
     filterTag: 'E-commerce',
     image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=80',
-    subtitle: 'A premium, high-conversion digital storefront for industrial filtration solutions.'
+    subtitle: 'Premium filtered shower heads engineered with activated carbon technology for UAE water conditions.'
   },
   {
     slug: 'wagyuprimeuae',
@@ -39,7 +39,7 @@ const PROJECTS = [
     category: 'Luxury E-commerce',
     filterTag: 'E-commerce',
     image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=1000&q=80',
-    subtitle: 'Direct-to-consumer luxury culinary e-commerce showcasing elite Japanese beef cuts.'
+    subtitle: 'Direct-to-consumer luxury culinary delivery showcasing premium Japanese A5, Australian, and American beef cuts.'
   },
   {
     slug: 'alfredai',
@@ -47,15 +47,15 @@ const PROJECTS = [
     category: 'AI SaaS Product',
     filterTag: 'AI & SaaS',
     image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1000&q=80',
-    subtitle: 'Enterprise-grade intelligent assistant optimizing workplace workflow.'
+    subtitle: 'An intelligent assistant helping users understand concepts deeply with customizable difficulty levels.'
   },
   {
     slug: 'q-pro',
     title: 'Q-Pro',
-    category: 'Smart Queue System',
+    category: 'Smart Queue SaaS',
     filterTag: 'AI & SaaS',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80',
-    subtitle: 'Modernizing retail and healthcare wait-times with smart queue logistics.'
+    subtitle: 'Enterprise-grade queue management SaaS to prevent overcrowding with admin and super-admin panels.'
   }
 ];
 

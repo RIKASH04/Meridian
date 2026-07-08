@@ -10,32 +10,38 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    title: 'neighbourfriendly',
+    slug: 'neighbourfriendly',
+    title: 'NeighborFriendlyRentals',
     category: 'Website',
     image: '/images/works/neighbourfriendly.png',
   },
   {
-    title: 'krishimitra',
+    slug: 'krishimitra',
+    title: 'KrishiMitra',
     category: 'Mobile App',
     image: '/images/works/krishimitra.png',
   },
   {
+    slug: 'clensifilters',
     title: 'Clensifilters',
     category: 'E-commerce',
     image: '/images/works/clensifilters_sketch.png',
   },
   {
-    title: 'wagyuprimeuae',
+    slug: 'wagyuprimeuae',
+    title: 'Wagyu Prime UAE',
     category: 'E-commerce',
     image: '/images/works/wagyuprimeuae.png',
   },
   {
-    title: 'alfredai',
+    slug: 'alfredai',
+    title: 'Alfred AI',
     category: 'AI Chatbot',
     image: '/images/works/alfred.jpg',
   },
   {
-    title: 'q-pro',
+    slug: 'q-pro',
+    title: 'Q-Pro',
     category: 'Smart Queue System',
     image: '/images/works/qpro.png',
   },
@@ -241,7 +247,7 @@ export default function Works() {
               return (
                 <Link
                   key={i}
-                  href={`/${project.title.toLowerCase()}`}
+                  href={`/${project.slug}`}
                   className={styles.card}
                   data-cursor-hover
                   onClick={(e) => {

@@ -131,10 +131,10 @@ export default function ScrollVideo() {
         </div>
 
         <div ref={text2Ref} className={styles.textBlock} style={{ opacity: 0 }}>
-          <span className={styles.label}>AI Integration</span>
-          <h2 className={styles.title}>Neural Networks & Data Fibers</h2>
+          <span className={styles.label}>App Development</span>
+          <h2 className={styles.title}>Custom Applications & Platforms</h2>
           <p className={styles.desc}>
-            Intelligent automation weaving nodes into pulsing, shimmering data flows.
+            Designing and engineering seamless web and mobile solutions tailored to your needs.
           </p>
         </div>
 

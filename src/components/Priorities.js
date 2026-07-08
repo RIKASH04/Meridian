@@ -46,6 +46,8 @@ export default function Priorities() {
           </h2>
         </div>
 
+
+
         <div className={styles.grid}>
           {priorities.map((priority, i) => (
             <div

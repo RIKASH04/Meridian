@@ -171,10 +171,21 @@ export default function ServicesPage() {
           scrub: 0.5, // Low scrub value for responsive feel without jank
           invalidateOnRefresh: true,
           anticipatePin: 1, // Prevents the "jump" when pin starts
+          snap: {
+            snapTo: 1 / (cards.length - 1),
+            duration: { min: 0.2, max: 0.5 },
+            delay: 0.1,
+            ease: 'power1.inOut',
+          },
         },
       });
 
+      const isMobile = window.innerWidth <= 768;
+
       for (let i = 1; i < cards.length; i++) {
+        // Pause/delay before starting the transition
+        tl.to({}, { duration: 0.5 });
+
         // Slide the next card up over the current one
         tl.to(cards[i], {
           yPercent: 0,
@@ -182,13 +193,17 @@ export default function ServicesPage() {
           ease: 'none',
           force3D: true,
         });
-        // Simultaneously scale down & fade the card being covered
-        tl.to(cards[i - 1], {
-          scale: 0.92,
-          opacity: 0.4,
-          duration: 1,
-          force3D: true,
-        }, '<');
+
+        // Scale down & fade the card being covered only on desktop
+        // On mobile, keep it full size so there are no background gaps ("sheet space")
+        if (!isMobile) {
+          tl.to(cards[i - 1], {
+            scale: 0.92,
+            opacity: 0.4,
+            duration: 1,
+            force3D: true,
+          }, '<');
+        }
       }
     }, containerRef);
 
@@ -248,10 +263,15 @@ export default function ServicesPage() {
                     {service.description}
                   </p>
 
-                  {/* CTA button */}
-                  <Link href="/#contact" className={styles.learnMoreBtn} data-cursor-hover>
-                    LEARN MORE <span className={styles.btnArrow}>→</span>
-                  </Link>
+                  {/* CTA buttons */}
+                  <div className={styles.ctaRow}>
+                    <a href="https://wa.me/919686541863" target="_blank" rel="noreferrer" className={styles.quoteBtn} data-cursor-hover>
+                      GET A FREE QUOTE <span className={styles.btnArrow}>→</span>
+                    </a>
+                    <Link href="/projects" className={styles.workLink} data-cursor-hover>
+                      VIEW OUR WORK
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Right mockup image pane */}

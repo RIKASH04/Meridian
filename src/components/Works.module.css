@@ -284,29 +284,10 @@
     position: relative;
   }
 
-  /* Gradient fade on left and right edges */
-  .carouselSection::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 100%;
-    background: linear-gradient(to right, #121212, transparent);
-    z-index: 5;
-    pointer-events: none;
-  }
-
+  /* Remove side fade gradients on mobile — they mismatch the bg gradient */
+  .carouselSection::before,
   .carouselSection::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40px;
-    height: 100%;
-    background: linear-gradient(to left, #121212, transparent);
-    z-index: 5;
-    pointer-events: none;
+    display: none;
   }
 
   .carouselContainer {
@@ -346,7 +327,7 @@
 .transitionSpacer {
   width: 100%;
   height: 120px;
-  background: linear-gradient(to bottom, #121212, #232323);
+  background: linear-gradient(to bottom, #121212, #FFFFFF);
   pointer-events: none;
 }
 

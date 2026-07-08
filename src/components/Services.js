@@ -226,11 +226,20 @@ export default function Services() {
             scrub: 0.5,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            snap: {
+              snapTo: 1 / (cards.length - 1),
+              duration: { min: 0.2, max: 0.5 },
+              delay: 0.1,
+              ease: 'power1.inOut',
+            },
           },
         });
 
-        // Slide each card up to fully cover the previous one
+        // Slide each card up to cover the previous one with a delay beforehand
         for (let i = 1; i < cards.length; i++) {
+          // Pause/delay before starting the transition
+          tl.to({}, { duration: 0.5 });
+
           tl.to(cards[i], {
             yPercent: 0,
             duration: 1,
