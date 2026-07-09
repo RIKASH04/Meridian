@@ -1,255 +1,736 @@
+/* ==============================
+   PRIORITIES / 3D SHOWCASE SECTION
+   Performance-optimized version (Dark Theme)
+   ============================== */
+
 .priorities {
   width: 100%;
-  background: #FFFFFF;
-  padding: 140px 0 0;
+  background: #050505;
+  padding: 80px 0 0;
   position: relative;
   overflow: hidden;
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 60px;
-}
-
-.topSection {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.label {
-  display: inline-block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #5E17EB;
-  font-weight: 500;
-  margin-bottom: 24px;
-}
-
-.heading {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  color: #111111;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-}
-
-.headingAccent {
-  color: #5E17EB;
-  font-style: italic;
-}
-
-.grid {
+/* ─── Layout Grid ─── */
+.mainGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 100px;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  z-index: 10;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 96px 24px;
+  position: relative;
+  align-items: center;
 }
 
-.card {
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-  height: 380px;
+@media (min-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 96px;
+    padding: 96px 48px;
+  }
+}
+
+/* ─── Left Column ─── */
+.leftCol {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  gap: 32px;
 }
 
-.cardBgImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+@media (min-width: 1024px) {
+  .leftCol {
+    grid-column: span 6;
+  }
 }
 
-.cardImageOverlay {
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  width: fit-content;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8EA0FF;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.badgeText {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #8EA0FF;
+  letter-spacing: 0.1em;
+  font-family: 'Courier New', monospace;
+}
+
+/* Heading */
+.heading {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  font-family: var(--font-heading);
+}
+
+.headingGradient {
+  background: linear-gradient(to left, #8EA0FF, #5E17EB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 0 8px;
+}
+
+/* Description */
+.description {
+  font-size: 1.125rem;
+  color: #a3a3a3;
+  font-weight: 300;
+  max-width: 28rem;
+  line-height: 1.6;
+}
+
+/* CTA Row */
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+/* ─── Beam Button ─── */
+.beamButton {
+  display: inline-flex;
+  overflow: hidden;
+  text-transform: uppercase;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 9999px;
+  padding: 20px 48px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  will-change: transform;
+}
+
+.beamButton:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px -10px rgba(94, 23, 235, 0.5);
+}
+
+.beamBorderWrap {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.15); /* Uniform subtle tint for legibility, no gradient fade */
-  z-index: 2;
+  inset: 0;
+  z-index: -2;
+  border-radius: 9999px;
+  overflow: hidden;
+  padding: 1px;
+}
+
+.beamSpinner {
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0deg 300deg, #8EA0FF 360deg);
+  animation: beamSpinKf 3s linear infinite;
+  will-change: transform;
+}
+
+.beamBorderInner {
+  position: absolute;
+  inset: 1px;
+  border-radius: 9999px;
+  background: #000;
+}
+
+.beamBg {
+  z-index: -1;
+  overflow: hidden;
+  background: #0a0a0a;
+  border-radius: 9999px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+}
+
+.beamBgGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(63, 63, 70, 0.6), transparent);
+}
+
+.beamBgDots {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 12px 12px;
+  animation: dotsMoveKf 8s linear infinite;
+}
+
+.beamBgGlow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 66%;
+  height: 50%;
+  background: rgba(94, 23, 235, 0.1);
+  filter: blur(24px);
+  border-radius: 50%;
+  pointer-events: none;
   transition: background 0.5s ease;
 }
 
-.cardBgImage img {
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) !important;
+.beamButton:hover .beamBgGlow {
+  background: rgba(94, 23, 235, 0.3);
 }
 
-.card:hover .cardBgImage img {
-  transform: scale(1.1);
-}
-
-.card:hover .cardImageOverlay {
-  background: rgba(94, 23, 235, 0.2); /* Uniform subtle purple tint on hover */
-}
-
-.cardContent {
-  padding: 40px;
+.beamText {
   position: relative;
-  z-index: 3;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(142, 160, 255, 0.25);
-}
-
-.cardGlow {
-  position: absolute;
-  bottom: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(142, 160, 255, 0.15) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.card:hover .cardGlow {
-  opacity: 1;
-}
-
-.cardIcon {
-  font-size: 1.8rem;
-  color: #8EA0FF;
-  margin-bottom: 20px;
-  opacity: 0.8;
-  transition: transform 0.5s ease;
-}
-
-.card:hover .cardIcon {
-  transform: scale(1.1) rotate(10deg);
-}
-
-.cardTitle {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 12px;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.cardDesc {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 300;
-  line-height: 1.6;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-}
-
-/* CTA Section */
-.ctaSection {
-  text-align: center;
-}
-
-.ctaText {
-  font-size: 1.1rem;
-  color: #555555;
-  font-weight: 300;
-  margin-bottom: 28px;
-}
-
-.ctaBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 40px;
-  border-radius: 100px;
-  background: #5E17EB;
-  color: #fff;
-  font-size: 0.95rem;
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  transition: all 0.4s ease;
-  border: 1px solid transparent;
-  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
 }
 
-.ctaBtn:hover {
-  background: transparent;
-  color: #5E17EB;
-  border-color: #5E17EB;
-  gap: 20px;
+.beamButton:hover .beamText {
+  color: #fff;
 }
 
-.ctaBtnArrow {
+.beamArrow {
+  position: relative;
+  z-index: 10;
+  margin-left: 8px;
   transition: transform 0.3s ease;
 }
 
-.ctaBtn:hover .ctaBtnArrow {
+.beamButton:hover .beamArrow {
   transform: translateX(4px);
 }
 
-.servicesBtn {
-  display: inline-flex;
+/* Social Proof */
+.socialProof {
+  display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 40px;
-  border-radius: 100px;
-  background: #5E17EB;
-  color: #fff;
-  font-size: 0.95rem;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatarStack {
+  display: flex;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #050505;
+  margin-left: -8px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatarPurple { background: linear-gradient(135deg, #a855f7, #6366f1); }
+.avatarOrange { background: linear-gradient(135deg, #8EA0FF, #3b82f6); }
+.avatarGreen  { background: linear-gradient(135deg, #34d399, #14b8a6); }
+
+.socialText {
+  font-size: 0.75rem;
+  color: #a3a3a3;
+}
+
+/* Terminal */
+.terminal {
+  margin-top: 32px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #737373;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── Right Column ─── */
+.rightCol {
+  position: relative;
+  height: 420px;
+  perspective: 1000px;
+}
+
+@media (min-width: 768px) {
+  .rightCol {
+    height: 520px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .rightCol {
+    grid-column: span 6;
+    height: 620px;
+  }
+}
+
+/* ─── Main Panel (3D tilt) ─── */
+.mainPanel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: rotateX(3deg) rotateY(-3deg);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.mainPanel:hover {
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+/* Tab Bar */
+.tabBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tabDots {
+  display: flex;
+  gap: 6px;
+}
+
+.tabDotRed    { width: 10px; height: 10px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); }
+.tabDotYellow { width: 10px; height: 10px; border-radius: 50%; background: rgba(234, 179, 8, 0.2); }
+.tabDotGreen  { width: 10px; height: 10px; border-radius: 50%; background: rgba(34, 197, 94, 0.2); }
+
+.tabTitle {
+  margin: 0 auto;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #737373;
+}
+
+/* 3D Content Area (Dark viewport canvas for Spline) ─── */
+.contentArea {
+  flex: 1;
+  overflow: hidden;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.splineFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Grid overlay — lightweight, no 3D transforms */
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
+}
+
+/* ─── 3D Cube (lightweight — no backdrop-blur) ─── */
+.cubeWrap {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  transform-style: preserve-3d;
+  animation: spinSlowKf 12s linear infinite;
+  will-change: transform;
+}
+
+.cubeFace {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.cubeFront  { transform: translateZ(50px); }
+.cubeBack   { transform: rotateY(180deg) translateZ(50px); }
+.cubeLeft   { transform: rotateY(-90deg) translateZ(50px); }
+.cubeRight  { transform: rotateY(90deg) translateZ(50px); }
+.cubeTop    { transform: rotateX(90deg) translateZ(50px); }
+.cubeBottom { transform: rotateX(-90deg) translateZ(50px); }
+
+.cubeGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  filter: blur(12px);
+  animation: pulseDot 2s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+/* Axis Lines */
+.axisOrigin {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.axisY {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 60px;
+  background: #22c55e;
+}
+
+.axisX {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 1px;
+  background: #ef4444;
+}
+
+.axisZ {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 48px;
+  background: #3b82f6;
+  transform-origin: bottom;
+  transform: rotate(45deg) translate(-2px, 2px);
+}
+
+/* Bottom Toolbar */
+.toolbar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 9999px;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  z-index: 30;
+}
+
+.toolBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  transition: all 0.4s ease;
+  color: #a3a3a3;
   border: 1px solid transparent;
-  text-decoration: none;
-}
-
-.servicesBtn:hover {
   background: transparent;
-  color: #5E17EB;
-  border-color: #5E17EB;
-  gap: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.servicesBtn:hover .ctaBtnArrow {
-  transform: translateX(6px);
+.toolBtn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
+.toolBtnActive {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
-@media (max-width: 768px) {
-  .priorities {
-    padding: 100px 0 0;
-  }
-  .container {
-    padding: 0 24px;
-  }
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .card {
-    height: 320px;
-  }
-  .cardContent {
-    padding: 30px;
-  }
+/* ─── Floating Panels ─── */
+.floatPanel {
+  position: absolute;
+  background: rgba(38, 38, 38, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  animation: floatKf 6s ease-in-out infinite;
+  will-change: transform;
 }
 
+/* Side Toolbar */
+.sideToolbar {
+  left: -24px;
+  top: 48px;
+  width: 48px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sideBtn {
+  padding: 6px;
+  border-radius: 4px;
+  color: #a3a3a3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.sideBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sideDivider {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+}
+
+/* Material Panel */
+.materialPanel {
+  right: -16px;
+  bottom: -16px;
+  width: 192px;
+  padding: 16px;
+  animation-delay: 1s;
+}
+
+.materialHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.materialTitle {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #737373;
+}
+
+.materialSliders {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sliderGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #a3a3a3;
+}
+
+.sliderTrack {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.sliderFillPurple {
+  height: 100%;
+  background: #a855f7;
+  border-radius: 9999px;
+}
+
+.sliderFillOrange {
+  height: 100%;
+  background: #5E17EB;
+  border-radius: 9999px;
+}
+
+.colorSwatches {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.swatchPurple {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(94, 23, 235, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.swatchOrange {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(94, 23, 235, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.swatchAdd {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a3a3a3;
+}
+
+/* ─── Animations ─── */
+@keyframes beamSpinKf {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dotsMoveKf {
+  0%   { background-position: 0 0; }
+  100% { background-position: 24px 24px; }
+}
+
+@keyframes floatKf {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes spinSlowKf {
+  to { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* ─── Transition Spacer ─── */
 .transitionSpacer {
   width: 100%;
   height: 120px;
   margin-top: 80px;
-  background: linear-gradient(to bottom, #FFFFFF, #5E17EB);
+  background: linear-gradient(to bottom, #050505, #5E17EB);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .priorities {
+    padding: 40px 0 0;
+  }
+
+  .mainGrid {
+    padding: 48px 20px;
+    gap: 32px;
+  }
+
+  .heading {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+  }
+
+  .beamButton {
+    padding: 16px 32px;
+  }
+
+  .beamText {
+    font-size: 0.75rem;
+  }
+
+  .rightCol {
+    height: 380px;
+  }
+
+  /* Hide decorative floating panels on mobile to reduce clutter */
+  .sideToolbar {
+    display: none;
+  }
+
+  .materialPanel {
+    display: none;
+  }
+
+  .cubeWrap {
+    width: 70px;
+    height: 70px;
+    margin-left: -35px;
+    margin-top: -35px;
+  }
+
+  .cubeFront  { transform: translateZ(35px); }
+  .cubeBack   { transform: rotateY(180deg) translateZ(35px); }
+  .cubeLeft   { transform: rotateY(-90deg) translateZ(35px); }
+  .cubeRight  { transform: rotateY(90deg) translateZ(35px); }
+  .cubeTop    { transform: rotateX(90deg) translateZ(35px); }
+  .cubeBottom { transform: rotateX(-90deg) translateZ(35px); }
+
+  .transitionSpacer {
+    margin-top: 40px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainGrid {
+    padding: 32px 16px;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toolbar {
+    transform: translateX(-50%) scale(0.9);
+  }
 }
