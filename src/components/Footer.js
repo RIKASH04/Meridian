@@ -25,15 +25,12 @@ export default function Footer() {
             <div className={styles.pagesLinks}>
               <div className={styles.linkWrapper}>
                 <a href="/" className={styles.hugeLink}>HOME</a>
-                <span className={styles.decorDot} style={{ left: '60%', top: '20%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
                 <a href="/services" className={styles.hugeLink}>SERVICES</a>
-                <span className={styles.decorDot} style={{ left: '40%', top: '60%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
                 <a href="/projects" className={styles.hugeLink}>WORKS</a>
-                <span className={styles.decorDot} style={{ left: '55%', top: '90%' }}></span>
               </div>
               <div className={styles.linkWrapper}>
                 <a href="/projects" className={styles.hugeLink}>PROJECTS</a>

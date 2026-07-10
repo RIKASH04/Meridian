@@ -50,7 +50,7 @@ export default function Priorities() {
           {/* CTA Row */}
           <div className={styles.ctaRow}>
             {/* Animated Beam Button */}
-            <a href="#contact" className={styles.beamButton}>
+            <a href="/services" className={styles.beamButton}>
               {/* Border Beam */}
               <div className={styles.beamBorderWrap}>
                 <div className={styles.beamSpinner}></div>
@@ -65,7 +65,7 @@ export default function Priorities() {
               </div>
 
               {/* Button Text */}
-              <span className={styles.beamText}>Start Building</span>
+              <span className={styles.beamText}>Our Services</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.beamArrow}>
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
