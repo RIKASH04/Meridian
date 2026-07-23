@@ -372,7 +372,7 @@ export default function Services() {
               {/* Base truck */}
               <Image
                 src="/images/services/carr.png"
-                alt="Yellow delivery truck"
+                alt="Meridian services delivery — web development, AI solutions, and digital marketing"
                 width={400}
                 height={400}
                 className={styles.carImage}
@@ -462,7 +462,7 @@ export default function Services() {
             <div className={styles.cardInfo}>
               <Image
                 src="/images/logos/log2.svg"
-                alt=""
+                alt="Meridian logo"
                 width={40}
                 height={28}
                 className={styles.cardLogo}

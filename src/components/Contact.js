@@ -15,7 +15,7 @@ export default function Contact() {
           <div className={styles.imageContainer}>
             <Image
               src="/images/contact/neee1_nobg.png"
-              alt="Build together"
+              alt="Contact Meridian Digital Agency — let's build your next web development or AI project together"
               width={450}
               height={600}
               style={{ objectFit: 'contain', width: '100%', height: 'auto', display: 'block' }}

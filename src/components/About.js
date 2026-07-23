@@ -44,7 +44,7 @@ export default function About() {
               <div className={styles.floatingDesk}>
                 <Image
                   src="/images/about/floating-desk-final-transparent.png"
-                  alt="3D floating desk and laptop setup"
+                  alt="Meridian digital agency workspace — custom web development and app development environment"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'contain' }}

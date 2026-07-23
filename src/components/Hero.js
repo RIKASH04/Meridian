@@ -42,7 +42,7 @@ export default function Hero({ visible }) {
           <div className={styles.characterMask}></div>
           <Image
             src="/images/hero/hello-removebg-preview.png"
-            alt="Lead Designer Portrait"
+            alt="Meridian Digital Agency lead designer — crafting premium web development and AI solutions"
             width={700}
             height={900}
             priority
@@ -85,7 +85,7 @@ export default function Hero({ visible }) {
       </div>
 
       {/* Scroll Hint */}
-      <div className={styles.scrollHint}>
+      <div className={styles.scrollHint} aria-hidden="true">
         <div className={styles.scrollLine}></div>
         <span className={styles.scrollText}>SCROLL</span>
       </div>

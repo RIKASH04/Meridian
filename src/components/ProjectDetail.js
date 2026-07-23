@@ -239,7 +239,7 @@ export default function ProjectDetail() {
         <div className={styles.heroImageContainer}>
           <Image
             src={project.heroImage}
-            alt={project.title}
+            alt={`${project.title} case study - ${project.category} by Meridian Digital Agency`}
             fill
             priority
             className={styles.heroImage}
@@ -287,7 +287,7 @@ export default function ProjectDetail() {
               <div key={index} className={styles.galleryImgWrap}>
                 <Image
                   src={imgSrc}
-                  alt={`${project.title} detail ${index + 1}`}
+                  alt={`${project.title} ${project.category} application dashboard detail ${index + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 640px"
                   className={styles.galleryImg}
@@ -312,7 +312,7 @@ export default function ProjectDetail() {
               <div key={index} className={styles.gridImgWrap}>
                 <Image
                   src={imgSrc}
-                  alt={`${project.title} grid layout ${index + 1}`}
+                  alt={`${project.title} ${project.category} user interface design showcase ${index + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 640px"
                   className={styles.gridImg}
