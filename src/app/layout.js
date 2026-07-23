@@ -82,7 +82,7 @@ export const metadata = {
 
   // ─── Verification Placeholders ─────────────────────────────────
   verification: {
-    google: "YOUR_GOOGLE_SITE_VERIFICATION_CODE",
+    google: "0pHDgxy69mtFTlkffvk6WPAhg1H5vyh27APMPe80MiQ",
     yandex: "YOUR_YANDEX_VERIFICATION_CODE",
   },
 
