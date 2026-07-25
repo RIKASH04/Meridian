@@ -20,7 +20,7 @@ export default function AppleIcon() {
         <svg
           width="120"
           height="120"
-          viewBox="35 220 105 65"
+          viewBox="34.5 200 100 100"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g fill="#FFFFFF">
