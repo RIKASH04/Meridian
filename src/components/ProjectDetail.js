@@ -17,20 +17,20 @@ const PROJECT_DATA = {
     client: 'NeighbourFriendly Rentals',
     date: '2025',
     tags: ['Next.js', 'Geo-Fencing', 'Peer-to-Peer', 'Web App'],
-    heroImage: '/images/works/neighbourfriendly.png',
+    heroImage: '/images/projects/neighbourfriendly/krish1.png',
     conceptTitle: 'Trust-First Rental Sharing',
     conceptDesc: 'Finding reliable items and renting them within local communities has been challenging due to safety and trust concerns. NeighbourFriendly Rentals is a trust-first marketplace designed to let users safely turn unused household items (like cameras, drills, and speakers) into extra income, while allowing neighbors to rent what they need locally for a fraction of the cost.',
     approachTitle: 'Verification & Security Ecosystem',
     approachDesc: 'We engineered a local-first discovery directory focusing on verified identity and secure interactions. By implementing digital rental agreements and rating/review mechanisms, we eliminated the stress and paperwork of neighborhood renting. The site allows seamless browsing, direct chat, and transparent user verification.',
     galleryImages: [
-      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80'
+      '/images/projects/neighbourfriendly/krish2.png',
+      '/images/projects/neighbourfriendly/krish3.png'
     ],
     gridImages: [
-      'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&w=1000&q=80'
+      '/images/projects/neighbourfriendly/krish4.png',
+      '/images/projects/neighbourfriendly/krish5.png',
+      '/images/projects/neighbourfriendly/krish6.png',
+      '/images/projects/neighbourfriendly/krish7.png'
     ],
   },
   krishimitra: {
@@ -40,20 +40,20 @@ const PROJECT_DATA = {
     client: 'Agricultural AI Initiative',
     date: '2026',
     tags: ['React Native', 'Voice Assistant', 'AI Diagnostics', 'Price Prediction'],
-    heroImage: '/images/works/krishimitra.png',
+    heroImage: '/images/projects/krishimitra/krishi5.png',
     conceptTitle: 'AI Agronomy & Voice First Accessibility',
     conceptDesc: 'Remote agricultural regions benefit immensely from real-time pricing and crop diagnostics, but language and literacy barriers often limit accessibility. KrishiMitra is designed specifically for Kannada-speaking farmers, prioritizing a voice assistant interface so farmers can interact and query information naturally through spoken commands.',
     approachTitle: 'Smart Telemetry & Price Forecasting',
     approachDesc: 'We integrated a mobile-optimized computer vision model for instant crop disease detection from photos, paired with an advanced price prediction algorithm that acts like a stock market ticker for agricultural crops. The app also delivers critical localized data such as weather, soil health metrics, and wholesale market prices, all accessible via voice assistance.',
     galleryImages: [
-      'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=1000&q=80'
+      '/images/projects/krishimitra/krishi2.png',
+      '/images/projects/krishimitra/krishi3.png'
     ],
     gridImages: [
-      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1000&q=80'
+      '/images/projects/krishimitra/krishi1.jpeg',
+      '/images/projects/krishimitra/krishi4.png',
+      '/images/projects/krishimitra/krishi6.png',
+      '/images/projects/krishimitra/krishi8.png'
     ],
   },
   clensifilters: {
@@ -109,20 +109,20 @@ const PROJECT_DATA = {
     client: 'Alfred AI Corp',
     date: '2026',
     tags: ['AI Chatbot', 'LLMs', 'Adaptive Learning', 'UX Design'],
-    heroImage: '/images/works/alfredai.png',
+    heroImage: '/images/projects/alfredai/alf1.png',
     conceptTitle: 'Adaptive Learning & Deep Comprehension',
     conceptDesc: 'Standard AI assistants answer queries with a single, fixed explanation style that might be too simple or overly complex for the user\'s current knowledge. Alfred AI is built to democratize deep understanding of concepts by showing the inherent difficulty level of topics and allowing users to customize the difficulty level of the answers they receive.',
     approachTitle: 'Tailored Interface & Interactive Settings',
     approachDesc: 'We designed a clean, user-friendly workspace featuring real-time stream replies and an interactive complexity slider. The interface exposes difficulty indicators for each learning path, letting users dial the output style from beginner-friendly metaphors to postgraduate academic breakdowns.',
     galleryImages: [
-      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80'
+      '/images/projects/alfredai/alf2.png',
+      '/images/projects/alfredai/alf3.png'
     ],
     gridImages: [
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80'
+      '/images/projects/alfredai/alf4.png',
+      '/images/projects/alfredai/alf5.png',
+      '/images/projects/alfredai/alf6.png',
+      '/images/projects/alfredai/alf7.png'
     ],
   },
   qpro: {

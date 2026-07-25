@@ -13,13 +13,13 @@ const projects = [
     slug: 'neighbourfriendly',
     title: 'NeighborFriendlyRentals',
     category: 'Website',
-    image: '/images/works/neighbourfriendly.png',
+    image: '/images/projects/neighbourfriendly/krish1.png',
   },
   {
     slug: 'krishimitra',
     title: 'KrishiMitra',
     category: 'Mobile App',
-    image: '/images/works/krishimitra.png',
+    image: '/images/projects/krishimitra/krishi5.png',
   },
   {
     slug: 'clensifilters',
@@ -37,7 +37,7 @@ const projects = [
     slug: 'alfredai',
     title: 'Alfred AI',
     category: 'AI Chatbot',
-    image: '/images/works/alfred.jpg',
+    image: '/images/projects/alfredai/alf1.png',
   },
   {
     slug: 'q-pro',

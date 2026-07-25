@@ -14,7 +14,7 @@ const PROJECTS = [
     title: 'NeighborFriendlyRentals',
     category: 'Web Platform',
     filterTag: 'Web Platform',
-    image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1000&q=80',
+    image: '/images/projects/neighbourfriendly/krish1.png',
     subtitle: 'A trust-first peer-to-peer neighborhood rental marketplace with verified users and digital agreements.'
   },
   {
@@ -22,7 +22,7 @@ const PROJECTS = [
     title: 'KrishiMitra',
     category: 'Mobile Application',
     filterTag: 'Mobile Application',
-    image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1000&q=80',
+    image: '/images/projects/krishimitra/krishi5.png',
     subtitle: 'Kannada-first voice assistant AI app empowering farmers with crop disease detection, price predictions, and soil analytics.'
   },
   {
@@ -46,7 +46,7 @@ const PROJECTS = [
     title: 'Alfred AI',
     category: 'AI SaaS Product',
     filterTag: 'AI & SaaS',
-    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1000&q=80',
+    image: '/images/projects/alfredai/alf1.png',
     subtitle: 'An intelligent assistant helping users understand concepts deeply with customizable difficulty levels.'
   },
   {
