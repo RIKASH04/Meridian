@@ -19,7 +19,7 @@
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 100px;
-  margin-bottom: 80px;
+  margin-bottom: 0px;
 }
 
 .sectionLabel {
@@ -132,6 +132,7 @@
   text-decoration: none;
   letter-spacing: -0.01em;
   transition: color 0.4s ease;
+  text-transform: lowercase;
 }
 
 .contactInfo:hover {
@@ -235,7 +236,7 @@
 .whatsappBtn {
   position: absolute;
   right: 60px;
-  bottom: 120px;
+  bottom: 40px;
   background: #5E17EB;
   padding: 14px 28px;
   border-radius: 50px;

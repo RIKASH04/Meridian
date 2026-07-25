@@ -154,12 +154,12 @@ const organizationSchema = {
       availableLanguage: ["English", "Hindi", "Kannada"],
     },
   ],
-  email: "hello@merdian.com",
+  email: "hello@meridianlabss.com",
   sameAs: [
     "https://www.instagram.com/meridian._.solutions",
-    "https://linkedin.com",
-    "https://twitter.com",
-    "https://facebook.com",
+    "https://www.linkedin.com/company/meridian-labs26/",
+    "https://x.com/lumaax_global?s=11",
+    "https://wa.me/919686541863",
   ],
   knowsAbout: [
     "Meridian Labs",
@@ -343,7 +343,7 @@ const faqSchema = {
       name: "How can I contact Meridian Labs?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can contact Meridian Labs via WhatsApp at +91 96865 41863, email hello@merdian.com, or visit meridianlabss.com.",
+        text: "You can contact Meridian Labs via WhatsApp at +91 96865 41863, email hello@meridianlabss.com, or visit meridianlabss.com.",
       },
     },
   ],

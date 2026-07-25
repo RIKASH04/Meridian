@@ -45,14 +45,14 @@ export default function Footer() {
           <div className={styles.socialCol}>
             <span className={styles.sectionLabel}>/ SOCIAL</span>
             <div className={styles.socialLinks}>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>X</a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>LINKEDIN</a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>FACEBOOK</a>
+              <a href="https://x.com/lumaax_global?s=11" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>X</a>
+              <a href="https://www.linkedin.com/company/meridian-labs26/" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>LINKEDIN</a>
               <a href="https://www.instagram.com/meridian._.solutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>INSTAGRAM</a>
+              <a href="https://wa.me/919686541863" target="_blank" rel="noreferrer" className={styles.boldSocialLink}>WHATSAPP</a>
             </div>
 
             <div className={styles.contactDirect}>
-              <a href="mailto:hello@merdian.com" className={styles.contactInfo}>HELLO@MERDIAN.COM</a>
+              <a href="mailto:hello@meridianlabss.com" className={styles.contactInfo}>hello@meridianlabss.com</a>
               <a href="tel:+919686541863" className={styles.contactInfo}>+91 96865 41863</a>
               <a href="tel:+918197424986" className={styles.contactInfo}>+91 81974 24986</a>
             </div>
@@ -60,44 +60,7 @@ export default function Footer() {
 
         </div>
 
-        {/* Office Details Row */}
-        <div className={styles.officeRow}>
-          
-          {/* Left: Office Address */}
-          <div className={styles.officeLeft}>
-            <div className={styles.addressBlock}>
-              <span className={styles.subLabel}>/ OFFICE</span>
-              <p className={styles.addressText}>
-                PUTTUR - 574201,<br />
-                KARNATAKA, INDIA
-              </p>
-            </div>
-          </div>
 
-          {/* Right: Second Office Address */}
-          <div className={styles.officeRight}>
-            <div className={styles.addressBlock}>
-              <span className={styles.subLabel}>/ OFFICE</span>
-              <p className={styles.addressText}>
-                MOODBIDRE,<br />
-                KARNATAKA, INDIA
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom copyright & legal footer */}
-        <div className={styles.bottomBar}>
-          <div className={styles.copyright}>
-            © {new Date().getFullYear()} THE MERIDIAN AGENCY
-          </div>
-          
-          <div className={styles.legalLinks}>
-            <a href="#" className={styles.legalLink}>PRIVACY POLICY</a>
-            <a href="#" className={styles.legalLink}>TERMS & CONDITIONS</a>
-          </div>
-        </div>
 
         {/* Floating WhatsApp chat button */}
         <a 

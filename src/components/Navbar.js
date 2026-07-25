@@ -186,10 +186,10 @@ export default function Navbar({ visible }) {
           <div className={styles.menuFooter}>
             <div className={styles.menuSocial}>
               <a href="https://www.instagram.com/meridian._.solutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer">Instagram ↗</a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer">X ↗</a>
+              <a href="https://www.linkedin.com/company/meridian-labs26/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a href="https://x.com/lumaax_global?s=11" target="_blank" rel="noreferrer">X ↗</a>
             </div>
-            <p className={styles.menuEmail}>hello@meridian.com</p>
+            <p className={styles.menuEmail}>hello@meridianlabss.com</p>
           </div>
         </div>
       </div>

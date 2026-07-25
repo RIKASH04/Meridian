@@ -47,7 +47,7 @@ export default function Contact() {
                 </p>
                 {/* Desktop-only buttons */}
                 <div className={styles.buttons}>
-                  <a href="mailto:hello@merdian.com" className={styles.primaryBtn} data-cursor-hover>
+                  <a href="mailto:hello@meridianlabss.com" className={styles.primaryBtn} data-cursor-hover>
                     Contact Us Now ➜
                   </a>
                   <a href="https://wa.me/919686541863" className={styles.secondaryBtn} data-cursor-hover target="_blank" rel="noreferrer">
@@ -62,7 +62,7 @@ export default function Contact() {
 
       {/* Buttons below the row — visible on mobile only and centered */}
       <div className={styles.mobileButtons}>
-        <a href="mailto:hello@merdian.com" className={styles.primaryBtn} data-cursor-hover>
+        <a href="mailto:hello@meridianlabss.com" className={styles.primaryBtn} data-cursor-hover>
           Contact Us Now ➜
         </a>
         <a href="https://wa.me/919686541863" className={styles.secondaryBtn} data-cursor-hover target="_blank" rel="noreferrer">
