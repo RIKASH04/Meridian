@@ -15,105 +15,109 @@ export default function CustomCursor() {
     gsap.set(cursor, { xPercent: -50, yPercent: -50 });
     gsap.set(dot, { xPercent: -50, yPercent: -50 });
 
-    // GSAP quickTo for ultra-smooth and lag-free mouse tracking
-    const xToCursor = gsap.quickTo(cursor, 'x', { duration: 0.35, ease: 'power3.out' });
-    const yToCursor = gsap.quickTo(cursor, 'y', { duration: 0.35, ease: 'power3.out' });
-    
-    const xToDot = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power2.out' });
-    const yToDot = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power2.out' });
+    // GSAP quickTo for ultra-smooth and hardware-accelerated mouse tracking
+    const xToCursor = gsap.quickTo(cursor, 'x', { duration: 0.3, ease: 'power3.out' });
+    const yToCursor = gsap.quickTo(cursor, 'y', { duration: 0.3, ease: 'power3.out' });
+    const scaleToCursor = gsap.quickTo(cursor, 'scale', { duration: 0.25, ease: 'power2.out' });
+
+    const xToDot = gsap.quickTo(dot, 'x', { duration: 0.06, ease: 'power2.out' });
+    const yToDot = gsap.quickTo(dot, 'y', { duration: 0.06, ease: 'power2.out' });
 
     let lastMouseX = window.innerWidth / 2;
     let lastMouseY = window.innerHeight / 2;
-    let lastTime = Date.now();
-    let angle = 0;
-    let speed = 0;
+    let lastTime = performance.now();
+    let isHovering = false;
 
-    const onMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      
+    // Throttled RAF handler for mouse velocity
+    let rafId = null;
+    let pendingEvent = null;
+
+    const processPointer = () => {
+      if (!pendingEvent) return;
+      const { clientX, clientY } = pendingEvent;
+
       xToCursor(clientX);
       yToCursor(clientY);
       xToDot(clientX);
       yToDot(clientY);
 
-      // Simple, beautiful velocity scaling (elastic spring effect)
-      const now = Date.now();
-      const dt = now - lastTime || 1;
+      const now = performance.now();
+      const dt = Math.max(now - lastTime, 1);
       const dx = clientX - lastMouseX;
       const dy = clientY - lastMouseY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      speed = Math.min(distance / dt, 1.5);
+      const distance = Math.hypot(dx, dy);
+      const speed = Math.min(distance / dt, 1.5);
 
-      gsap.to(cursor, {
-        scale: 1 + speed * 0.2,
-        duration: 0.2,
-        overwrite: 'auto'
-      });
+      if (!isHovering) {
+        scaleToCursor(1 + speed * 0.15);
+      }
 
       lastMouseX = clientX;
       lastMouseY = clientY;
       lastTime = now;
+      pendingEvent = null;
     };
 
-    const onMouseEnterLink = () => {
-      gsap.to(cursor, {
-        scale: 1.8,
-        backgroundColor: 'rgba(94, 23, 235, 0.25)',
-        borderColor: '#8EA0FF',
-        duration: 0.35,
-        overwrite: 'auto'
-      });
-      gsap.to(dot, {
-        scale: 1.5,
-        backgroundColor: '#8EA0FF',
-        duration: 0.2,
-        overwrite: 'auto'
-      });
+    const onMouseMove = (e) => {
+      pendingEvent = e;
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          processPointer();
+          rafId = null;
+        });
+      }
     };
 
-    const onMouseLeaveLink = () => {
-      gsap.to(cursor, {
-        scale: 1,
-        backgroundColor: 'transparent',
-        borderColor: 'rgba(255, 255, 255, 0.5)',
-        duration: 0.35,
-        overwrite: 'auto'
-      });
-      gsap.to(dot, {
-        scale: 1,
-        backgroundColor: '#fff',
-        duration: 0.3,
-        overwrite: 'auto'
-      });
+    // Clean, high-performance event delegation — replaces heavy MutationObserver
+    const onMouseOver = (e) => {
+      const interactive = e.target.closest('a, button, [data-cursor-hover], input, textarea');
+      if (interactive) {
+        isHovering = true;
+        gsap.to(cursor, {
+          scale: 1.8,
+          backgroundColor: 'rgba(94, 25, 246, 0.25)',
+          borderColor: '#8EA0FF',
+          duration: 0.3,
+          overwrite: 'auto',
+        });
+        gsap.to(dot, {
+          scale: 1.4,
+          backgroundColor: '#8EA0FF',
+          duration: 0.2,
+          overwrite: 'auto',
+        });
+      }
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-
-    // Dynamic selectors to register interactive hover states
-    const updateListeners = () => {
-      const links = document.querySelectorAll('a, button, [data-cursor-hover]');
-      links.forEach((link) => {
-        link.removeEventListener('mouseenter', onMouseEnterLink);
-        link.removeEventListener('mouseleave', onMouseLeaveLink);
-        link.addEventListener('mouseenter', onMouseEnterLink);
-        link.addEventListener('mouseleave', onMouseLeaveLink);
-      });
+    const onMouseOut = (e) => {
+      const interactive = e.target.closest('a, button, [data-cursor-hover], input, textarea');
+      if (interactive) {
+        isHovering = false;
+        gsap.to(cursor, {
+          scale: 1,
+          backgroundColor: 'transparent',
+          borderColor: 'rgba(255, 255, 255, 0.5)',
+          duration: 0.3,
+          overwrite: 'auto',
+        });
+        gsap.to(dot, {
+          scale: 1,
+          backgroundColor: '#fff',
+          duration: 0.25,
+          overwrite: 'auto',
+        });
+      }
     };
 
-    updateListeners();
-
-    // Use MutationObserver to automatically apply hover effects on newly rendered DOM elements
-    const observer = new MutationObserver(updateListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseover', onMouseOver, { passive: true });
+    document.addEventListener('mouseout', onMouseOut, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      observer.disconnect();
-      const links = document.querySelectorAll('a, button, [data-cursor-hover]');
-      links.forEach((link) => {
-        link.removeEventListener('mouseenter', onMouseEnterLink);
-        link.removeEventListener('mouseleave', onMouseLeaveLink);
-      });
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -121,6 +125,7 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
+        className="customCursor"
         style={{
           position: 'fixed',
           top: 0,
@@ -132,12 +137,14 @@ export default function CustomCursor() {
           backgroundColor: 'transparent',
           pointerEvents: 'none',
           zIndex: 9999,
-          transform: 'translate(-50%, -50%)',
+          transform: 'translate3d(-50%, -50%, 0)',
           willChange: 'transform',
+          backfaceVisibility: 'hidden',
         }}
       />
       <div
         ref={cursorDotRef}
+        className="customCursor"
         style={{
           position: 'fixed',
           top: 0,
@@ -148,8 +155,9 @@ export default function CustomCursor() {
           background: '#fff',
           pointerEvents: 'none',
           zIndex: 9999,
-          transform: 'translate(-50%, -50%)',
+          transform: 'translate3d(-50%, -50%, 0)',
           willChange: 'transform',
+          backfaceVisibility: 'hidden',
         }}
       />
     </>

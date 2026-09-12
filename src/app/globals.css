@@ -169,6 +169,11 @@ img {
   html {
     font-size: 14px;
   }
+
+  .customCursor {
+    display: none !important;
+  }
+
   .container {
     padding: 0 24px;
   }

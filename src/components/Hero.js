@@ -19,12 +19,41 @@ export default function Hero({ visible }) {
   const sectionRef = useRef(null);
   const characterRef = useRef(null);
   const infoLeftRef = useRef(null);
+  const infoRightRef = useRef(null);
+  const titlesRef = useRef(null);
+
+  useEffect(() => {
+    // Smooth entrance animation
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(
+        characterRef.current,
+        { opacity: 0, y: 40, scale: 0.98 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.1, delay: 0.1 }
+      )
+        .fromTo(
+          titlesRef.current,
+          { opacity: 0, y: -20 },
+          { opacity: 1, y: 0, duration: 1.0 },
+          '-=0.8'
+        )
+        .fromTo(
+          [infoLeftRef.current, infoRightRef.current],
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 },
+          '-=0.6'
+        );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [visible]);
 
   return (
     <section ref={sectionRef} className={styles.hero} id="hero">
-      {/* Large Background Titles */}
-      <div className={styles.titlesRow}>
-        <div className={styles.marqueeTrack}>
+      {/* Large Background Titles (Marquee) - Behind Character */}
+      <div ref={titlesRef} className={styles.titlesRow}>
+        <div className={`${styles.marqueeTrack} ${styles.desktopTitles}`}>
           <div className={styles.marqueeContent}>
             {[...servicesList, ...servicesList, ...servicesList].map((service, i) => (
               <React.Fragment key={i}>
@@ -34,26 +63,34 @@ export default function Hero({ visible }) {
             ))}
           </div>
         </div>
+        <div className={`${styles.marqueeTrack} ${styles.mobileTitles}`} aria-label="Meridian services">
+          <div className={styles.marqueeContent}>
+            {[...servicesList, ...servicesList].map((service, i) => (
+              <React.Fragment key={i}>
+                <span className={styles.mobileTitle}>{service}</span>
+                <span className={styles.mobileDot}>·</span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Character Image */}
-      <div ref={characterRef} className={styles.characterWrapper}>
-        <div className={styles.characterCropContainer}>
-          <div className={styles.characterMask}></div>
+      {/* Character Cutout - Idle in Center */}
+      <div className={styles.characterWrapper}>
+        <div ref={characterRef} className={styles.characterCropContainer}>
           <Image
-            src="/images/hero/hello-removebg-preview.png"
-            alt="Meridian Digital Agency lead designer — crafting premium web development and AI solutions"
-            width={700}
-            height={900}
+            src="/images/hero/hero-character-cutout.png"
+            alt="Meridian Lead Designer"
+            width={504}
+            height={839}
             priority
             unoptimized
             className={styles.characterImg}
-            style={{ width: 'auto', height: '115vh' }}
           />
         </div>
       </div>
 
-      {/* Bottom Left Info */}
+      {/* Bottom Left Info & Buttons */}
       <div ref={infoLeftRef} className={styles.infoLeft}>
         <div className={styles.labelRow}>
           <span className={styles.labelLine}></span>
@@ -74,7 +111,7 @@ export default function Hero({ visible }) {
       </div>
 
       {/* Bottom Right Info */}
-      <div className={styles.infoRight}>
+      <div ref={infoRightRef} className={styles.infoRight}>
         <div className={styles.labelRow} style={{ alignSelf: 'flex-end' }}>
           <span className={styles.labelText}>専門分野</span>
           <span className={styles.labelLine}></span>

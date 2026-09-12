@@ -17,6 +17,7 @@ export default function Navbar({ visible }) {
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
   const linksRef = useRef([]);
   const pathname = usePathname();
   const router = useRouter();
@@ -33,6 +34,19 @@ export default function Navbar({ visible }) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // check initial position
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const footer = document.querySelector('footer');
+    if (!footer) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setFooterVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -119,11 +133,16 @@ export default function Navbar({ visible }) {
 
   return (
     <>
-      <nav ref={navRef} className={`${styles.navbar} ${isSubpage ? styles.navbarSubpage : ''} ${isSubpage && scrolled ? styles.navbarScrolled : ''} ${isLightBg ? styles.navbarLightBg : ''}`}>
+      <nav ref={navRef} className={`${styles.navbar} ${isSubpage ? styles.navbarSubpage : ''} ${isSubpage && scrolled ? styles.navbarScrolled : ''} ${isLightBg ? styles.navbarLightBg : ''} ${footerVisible ? styles.navbarHidden : ''}`}>
         <div className={styles.navInner}>
           {/* Logo */}
           <a href="/" className={styles.logo} onClick={handleLogoClick}>
-            <Image src={isLightBg || (isSubpage && scrolled) ? '/images/logos/mylogo.svg' : '/images/logos/log3.svg'} alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain' }} />
+            <Image className={styles.desktopLogo} src={isLightBg || (isSubpage && scrolled) ? '/images/logos/mylogo.svg' : '/images/logos/log3.svg'} alt="Meridian" width={170} height={28} priority style={{ objectFit: 'contain' }} />
+            <span className={styles.mobileBrand} aria-label="Meridian Labs">
+              <Image className={styles.mobileMark} src="/images/logos/log2.svg" alt="" width={28} height={28} priority />
+              <span className={styles.brandDivider}>|</span>
+              <span className={styles.brandName}><span>Meridian</span><span>Labs</span></span>
+            </span>
           </a>
 
           {/* Desktop Links */}

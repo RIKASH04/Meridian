@@ -7,7 +7,6 @@ const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: f
 const Preloader = dynamic(() => import('@/components/Preloader'), { ssr: false });
 const Navbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
 const Hero = dynamic(() => import('@/components/Hero'), { ssr: false });
-const ScrollVideo = dynamic(() => import('@/components/ScrollVideo'), { ssr: false });
 const Marquee = dynamic(() => import('@/components/Marquee'), { ssr: false });
 const Services = dynamic(() => import('@/components/Services'), { ssr: false });
 const Works = dynamic(() => import('@/components/Works'), { ssr: false });
@@ -44,7 +43,6 @@ export default function Home() {
       <main>
         <Navbar visible={preloaderDone} />
         <Hero visible={preloaderDone} />
-        <ScrollVideo />
         <Marquee />
         <Services />
         <Works />
