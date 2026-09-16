@@ -117,25 +117,42 @@ export default function Services() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
 
+  const cardRafMap = useRef(new WeakMap());
+
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateY = ((x - centerX) / centerX) * 15;
-    const rotateX = -((y - centerY) / centerY) * 15;
+    if (cardRafMap.current.has(card)) return;
 
-    card.style.setProperty('--rotate-x', `${rotateX}deg`);
-    card.style.setProperty('--rotate-y', `${rotateY}deg`);
+    const rafId = requestAnimationFrame(() => {
+      const rect = card.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateY = ((x - centerX) / centerX) * 12;
+      const rotateX = -((y - centerY) / centerY) * 12;
+
+      card.style.setProperty('--rotate-x', `${rotateX}deg`);
+      card.style.setProperty('--rotate-y', `${rotateY}deg`);
+      cardRafMap.current.delete(card);
+    });
+
+    cardRafMap.current.set(card, rafId);
   };
 
   const handleMouseLeave = (e) => {
     const card = e.currentTarget;
+    const pendingRaf = cardRafMap.current.get(card);
+    if (pendingRaf) {
+      cancelAnimationFrame(pendingRaf);
+      cardRafMap.current.delete(card);
+    }
     card.style.setProperty('--rotate-x', '0deg');
     card.style.setProperty('--rotate-y', '0deg');
   };

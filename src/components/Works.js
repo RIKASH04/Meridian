@@ -99,10 +99,10 @@ export default function Works() {
     const N = projects.length;
 
     // Calculate which card of the copy is active using modulo
-    const index = Math.round(scrollLeft / step) % N;
-    // Handle negative values if any
-    const normalizedIndex = index < 0 ? (index + N) % N : index;
-    setActiveIndex(normalizedIndex);
+    const rawIndex = Math.round(scrollLeft / step) % N;
+    const normalizedIndex = rawIndex < 0 ? (rawIndex + N) % N : rawIndex;
+    // Only update state if index actually changed to avoid re-render thrashing
+    setActiveIndex((prev) => (prev === normalizedIndex ? prev : normalizedIndex));
 
     // Do not warp mid-drag or mid-touch to prevent visual jumpiness
     if (isDragging.current || isTouching.current) {

@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import IsgpPromo from '@/components/IsgpPromo';
 
 // Dynamic imports to prevent SSR issues with GSAP
 const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: false });
@@ -45,6 +46,7 @@ export default function Home() {
         <Hero visible={preloaderDone} />
         <Marquee />
         <Services />
+        <IsgpPromo />
         <Works />
         <Priorities />
         <Contact />

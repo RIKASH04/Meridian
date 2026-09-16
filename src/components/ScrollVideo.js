@@ -18,11 +18,31 @@ export default function ScrollVideo() {
     const section = sectionRef.current;
     if (!video || !section) return;
 
-    // Forces browser to preload/load video segments
     video.load();
 
+    let targetTime = 0;
+    let isSeeking = false;
+    let rafId = null;
+
+    const onSeeking = () => { isSeeking = true; };
+    const onSeeked = () => { isSeeking = false; };
+
+    video.addEventListener('seeking', onSeeking);
+    video.addEventListener('seeked', onSeeked);
+
+    // High performance render loop: only updates currentTime when not seeking to prevent decode lockup
+    const updatePlayhead = () => {
+      if (video && isFinite(video.duration) && video.readyState >= 2) {
+        if (!isSeeking && Math.abs(video.currentTime - targetTime) > 0.04) {
+          video.currentTime = targetTime;
+        }
+      }
+      rafId = requestAnimationFrame(updatePlayhead);
+    };
+
+    rafId = requestAnimationFrame(updatePlayhead);
+
     const ctx = gsap.context(() => {
-      // Set initial video time
       video.currentTime = 0;
 
       ScrollTrigger.create({
@@ -31,38 +51,28 @@ export default function ScrollVideo() {
         end: '+=300%',
         pin: true,
         anticipatePin: 1,
-        scrub: 1, // Smooth scrub setting for scroll inertia
+        scrub: 0.5,
         onUpdate: (self) => {
           const progress = self.progress; // 0 → 1
+          const duration = Math.min(video.duration || 7, 7);
+          targetTime = progress * duration;
 
-          // Scrub video progress smoothly with GSAP interpolation
-          if (video.readyState >= 2) {
-            const duration = Math.min(video.duration || 7, 7);
-            const targetTime = progress * duration;
-            gsap.to(video, {
-              currentTime: targetTime,
-              overwrite: 'auto',
-              duration: 0.3,
-              ease: 'power1.out',
-            });
-          }
-
-          // Phase 1 text: visible at start (0 to 0.20), then fades out (0.20 to 0.30)
+          // Phase 1 text: 0 to 0.20 visible, 0.20 to 0.30 fade out
           const t1 = text1Ref.current;
           if (t1) {
             if (progress < 0.20) {
               t1.style.opacity = '1';
-              t1.style.transform = 'translateY(0)';
+              t1.style.transform = 'translate3d(0, 0, 0)';
             } else if (progress < 0.30) {
               const p = (progress - 0.20) / 0.10;
               t1.style.opacity = String(1 - p);
-              t1.style.transform = `translateY(${-40 * p}px)`;
+              t1.style.transform = `translate3d(0, ${-40 * p}px, 0)`;
             } else {
               t1.style.opacity = '0';
             }
           }
 
-          // Phase 2 text: fades in (0.28 to 0.38), visible (0.38 to 0.58), then fades out (0.58 to 0.68)
+          // Phase 2 text: 0.28 to 0.38 fade in, 0.38 to 0.58 visible, 0.58 to 0.68 fade out
           const t2 = text2Ref.current;
           if (t2) {
             if (progress < 0.28) {
@@ -70,20 +80,20 @@ export default function ScrollVideo() {
             } else if (progress < 0.38) {
               const p = (progress - 0.28) / 0.10;
               t2.style.opacity = String(p);
-              t2.style.transform = `translateY(${40 * (1 - p)}px)`;
+              t2.style.transform = `translate3d(0, ${40 * (1 - p)}px, 0)`;
             } else if (progress < 0.58) {
               t2.style.opacity = '1';
-              t2.style.transform = 'translateY(0)';
+              t2.style.transform = 'translate3d(0, 0, 0)';
             } else if (progress < 0.68) {
               const p = (progress - 0.58) / 0.10;
               t2.style.opacity = String(1 - p);
-              t2.style.transform = `translateY(${-40 * p}px)`;
+              t2.style.transform = `translate3d(0, ${-40 * p}px, 0)`;
             } else {
               t2.style.opacity = '0';
             }
           }
 
-          // Phase 3 text: fades in (0.65 to 0.75), stays visible to the end
+          // Phase 3 text: 0.65 to 0.75 fade in, stays visible
           const t3 = text3Ref.current;
           if (t3) {
             if (progress < 0.65) {
@@ -91,10 +101,10 @@ export default function ScrollVideo() {
             } else if (progress < 0.75) {
               const p = (progress - 0.65) / 0.10;
               t3.style.opacity = String(p);
-              t3.style.transform = `translateY(${40 * (1 - p)}px)`;
+              t3.style.transform = `translate3d(0, ${40 * (1 - p)}px, 0)`;
             } else {
               t3.style.opacity = '1';
-              t3.style.transform = 'translateY(0)';
+              t3.style.transform = 'translate3d(0, 0, 0)';
             }
           }
         },
@@ -102,6 +112,9 @@ export default function ScrollVideo() {
     }, section);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      video.removeEventListener('seeking', onSeeking);
+      video.removeEventListener('seeked', onSeeked);
       if (ctx) ctx.revert();
     };
   }, []);
@@ -114,6 +127,7 @@ export default function ScrollVideo() {
         playsInline
         muted
         preload="auto"
+        disableRemotePlayback
         className={styles.video}
       />
 
